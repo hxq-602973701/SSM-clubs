@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyf.dao.NewsDao">
+	<resultMap type="News" id="BaseResultMap">
+		<result property="newsId" column="newsId"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="publishDate" column="publishDate"/>
+		<result property="author" column="author"/>
+		<result property="typeId" column="typeId"/>
+		<result property="typeName" column="typeName"/>
+		<result property="click" column="click"/>
+		<result property="isHead" column="isHead"/>
+		<result property="isImage" column="isImage"/>
+		<result property="imageName" column="imageName"/>
+		<result property="isHot" column="isHot"/>
+
+        <result property="total" column="total"/>
+	</resultMap>
+	
+	<select id="selectByCommon"  resultMap="BaseResultMap">
+		SELECT * from t_news n
+		<where>
+			  n.isImage=1 order by n.publishDate desc limit 0,5
+		</where>
+	</select>
+
+    <select id="selectByHead"  resultMap="BaseResultMap">
+        SELECT * from t_news n
+        <where>
+              n.isHead=1 order by n.publishDate desc limit 0,1
+        </where>
+    </select>
+
+    <select id="selectByCurrent"  resultMap="BaseResultMap">
+        SELECT * from t_news n
+           order by n.publishDate desc limit 0,8
+    </select>
+
+    <select id="selectByHot"  resultMap="BaseResultMap">
+        SELECT * from t_news n
+        <where>
+            n.isHot=1 order by n.publishDate desc limit 0,8
+        </where>
+    </select>
+
+    <select id="selectByNewsTypeId"  resultMap="BaseResultMap">
+        SELECT * from t_news n  INNER JOIN t_newstype nt ON  n.typeId = nt.newsTypeId
+        <where>
+            n.typeId = #{typeId}
+        </where>
+        order by n.publishDate desc limit 0,8
+    </select>
+
+    <select id="selectByClick"  resultMap="BaseResultMap">
+        SELECT * from t_news n
+        order by n.click desc limit 0,8
+    </select>
+
+    <select id="selectNewslistByPage"  resultMap="BaseResultMap">
+        SELECT * from t_news n  INNER JOIN t_newstype nt ON  n.typeId = nt.newsTypeId
+        <where>
+            <if test="typeId !=null">
+               n.typeId = #{typeId}
+            </if>
+        </where>
+        order by n.publishDate desc limit #{start},#{pageSize}
+    </select>
+
+    <select id="selectTotal"  resultMap="BaseResultMap" parameterType="int">
+        SELECT  count(*) as total from t_news n
+        <where>
+                n.typeId = #{typeId}
+        </where>
+    </select>
+
+    <select id="selectByTypeId"  resultMap="BaseResultMap">
+        SELECT * from t_news n  INNER JOIN t_newstype nt ON  n.typeId = nt.newsTypeId
+        <where>
+            <if test="typeId !=null">
+                n.typeId = #{typeId}
+            </if>
+        </where>
+        order by n.publishDate desc
+    </select>
+
+    <select id="selectByNewsId"  resultMap="BaseResultMap">
+        SELECT * from t_news n  INNER JOIN t_newstype nt ON  n.typeId = nt.newsTypeId
+        <where>
+            <if test="typeId !=null">
+                n.newsId = #{newsId}
+            </if>
+        </where>
+        order by n.publishDate desc
+    </select>
+
+    <select id="getUpAndDownPageId"  resultMap="BaseResultMap">
+        SELECT * from t_news n  where n.newsId &lt; #{newsId} ORDER BY n.newsId DESC limit 1
+    </select>
+
+    <select id="getDownPageId"  resultMap="BaseResultMap">
+        SELECT * from t_news n  where n.newsId &gt; #{newsId} ORDER BY n.newsId ASC limit 1
+    </select>
+
+    <update id="updateByClick">
+        update t_news set click=click+1 where newsId= #{newsId}
+    </update>
+</mapper>
