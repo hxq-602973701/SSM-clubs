@@ -28,4 +28,29 @@ public class NewsTypeServiceImpl implements NewsTypeService{
     public NewsType selectByNewsTypeId(News news) {
         return newsTypeDao.selectByNewsTypeId(news);
     }
+
+    @Override
+    public NewsType getNesTypeById(NewsType newsType) {
+        return newsTypeDao.getNesTypeById(newsType);
+    }
+
+    @Override
+    public void save(NewsType newsType) {
+        newsTypeDao.save(newsType);
+    }
+
+    @Override
+    public void updateByNewsTypeId(NewsType newsType) {
+        newsTypeDao.updateByNewsTypeId(newsType);
+    }
+
+    @Override
+    public List<NewsType> selectAll() {
+        return newsTypeDao.selectAll();
+    }
+
+    @Override
+    public int deleteNewsTypeById(NewsType newsType) {
+        return newsTypeDao.deleteNewsTypeById(newsType);
+    }
 }

@@ -14,4 +14,8 @@ public interface CommentDao {
     List<Comment> selectCommentList(News news);
 
     void saveComment(Comment comment);
+
+    List<Comment> selectAll(Comment comment);
+
+    int deleteCommentById(Comment comment);
 }

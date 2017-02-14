@@ -1,6 +1,7 @@
 package com.hyf.service;
 
 import com.hyf.entity.Link;
+import com.hyf.entity.NewsType;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface LinkService {
     void updateByLinkId(Link link);
 
     int deleteLinkById(Link link);
+
+
 }

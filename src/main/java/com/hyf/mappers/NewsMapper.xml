@@ -18,8 +18,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="isHot" column="isHot"/>
 
         <result property="total" column="total"/>
+        <association property="newsType" resultMap="BaseNewsTypeResult"/>
 	</resultMap>
-	
+
+    <resultMap type="NewsType" id="BaseNewsTypeResult">
+        <result property="newsTypeId" column="newsTypeId"/>
+        <result property="typeName" column="typeName"/>
+    </resultMap>
+    <insert id="newsAdd">
+        INSERT  INTO t_news(newsId,title,content,publishDate,author,typeId,click,isHead,isImage,imageName,isHot)
+         VALUES(#{newsId},#{title},#{content},now(),#{author},#{typeId},#{click},#{isHead},#{isImage},#{imageName},#{isHot})
+    </insert>
+
 	<select id="selectByCommon"  resultMap="BaseResultMap">
 		SELECT * from t_news n
 		<where>
@@ -107,4 +117,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateByClick">
         update t_news set click=click+1 where newsId= #{newsId}
     </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT n.*,
+        nt.typeName as typeName
+        from t_news  n INNER JOIN t_newstype nt ON n.typeId = nt.newsTypeId
+        <where>
+            <if test="s_bPublishDate!='' and s_bPublishDate!=null ">
+                <![CDATA[   and DATE_FORMAT(n.publishDate, '%Y-%m-%d')>=  DATE_FORMAT(#{s_bPublishDate}, '%Y-%m-%d')   ]]>
+
+            </if>
+            <if test="s_aPublishDate!='' and s_aPublishDate!=null">
+                <![CDATA[   and DATE_FORMAT(n.publishDate, '%Y-%m-%d')<=  DATE_FORMAT(#{s_aPublishDate}, '%Y-%m-%d')   ]]>
+            </if>
+            <if test="title != null and title != ''">
+                AND n.title LIKE concat(concat('%',#{title}),'%')
+            </if>
+        </where>
+    </select>
+
+    <update id="update">
+        UPDATE t_news  set title = #{title},author=#{author},typeId=#{typeId},isHead=#{isHead},isImage=#{isImage},isHot=#{isHot} WHERE newsId = #{newsId}
+    </update>
+
+    <delete id="deleteNewsById">
+        DELETE FROM t_news WHERE newsId = #{newsId}
+    </delete>
 </mapper>

@@ -28,4 +28,14 @@ public class CommentServiceImpl implements CommentService {
     public void saveComment(Comment comment) {
         commentDao.saveComment(comment);
     }
+
+    @Override
+    public List<Comment> selectAll(Comment comment) {
+        return commentDao.selectAll(comment);
+    }
+
+    @Override
+    public int deleteCommentById(Comment comment) {
+        return commentDao.deleteCommentById(comment);
+    }
 }

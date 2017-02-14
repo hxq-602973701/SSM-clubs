@@ -20,4 +20,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT  INTO t_comment(commentId,newsId,content,userIP,commentDate)
 		VALUES (#{commentId},#{newsId},#{content},#{userIP},#{commentDate})
 	</insert>
+
+	<select id="selectAll"  resultMap="BaseResultMap">
+		SELECT c.*,
+		n.title as newsTitle
+		from t_comment c INNER JOIN t_news n ON c.newsId = n.newsId
+		<where>
+			<if test="s_bCommentDate!='' and s_bCommentDate!=null ">
+                <![CDATA[   and DATE_FORMAT(c.commentDate, '%Y-%m-%d')>=  DATE_FORMAT(#{s_bCommentDate}, '%Y-%m-%d')   ]]>
+
+			</if>
+			<if test="s_aCommentDate!='' and s_aCommentDate!=null">
+                <![CDATA[   and DATE_FORMAT(c.commentDate, '%Y-%m-%d')<=  DATE_FORMAT(#{s_aCommentDate}, '%Y-%m-%d')   ]]>
+			</if>
+		</where>
+	</select>
+
+    <delete id="deleteCommentById">
+        DELETE FROM t_comment WHERE commentId in (#{commentIds})
+    </delete>
 </mapper> 

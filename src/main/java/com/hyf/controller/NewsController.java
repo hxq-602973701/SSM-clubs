@@ -10,18 +10,24 @@ import com.hyf.service.CommentService;
 import com.hyf.service.LinkService;
 import com.hyf.service.NewsService;
 import com.hyf.service.NewsTypeService;
-import com.hyf.util.NavUtil;
-import com.hyf.util.PageUtil;
-import com.hyf.util.PropertiesUtil;
-import com.hyf.util.StringUtil;
+import com.hyf.util.*;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -105,6 +111,118 @@ public class NewsController {
             model.addAttribute("pageCode", PageUtil.getUpAndDownPagation(total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("pageSize")), news.getTypeId()));
         }
         return  "/foreground/newsTemp";
+    }
+
+    @RequestMapping(value = "/newsPre",method = RequestMethod.GET)
+    public String preSaveNews(final Model model,News news) {
+        newsTypeList = newsTypeService.selectByNewsType(news);
+        model.addAttribute("newsTypeList",newsTypeList);
+        if(news.getNewsId()==0){
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻添加"));
+        }else{
+            news= newsService.selectByNewsId(news);
+            model.addAttribute("news",news);
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻修改"));
+        }
+        model.addAttribute("mainPage","/background/news/newsSave.jsp");
+        return "/background/mainTemp";
+    }
+
+    @RequestMapping(value = "/newsSave",method = RequestMethod.POST)
+    public String SaveNews(final Model model,News news,HttpServletRequest request) throws ServletException, IOException {
+        FileItemFactory factory=new DiskFileItemFactory();
+        ServletFileUpload upload=new ServletFileUpload(factory);
+        List<FileItem> items=null;
+        try {
+            items=upload.parseRequest(request);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Iterator itr=items.iterator();
+        while(itr.hasNext()){
+            FileItem item=(FileItem) itr.next();
+            if(item.isFormField()){
+                String fieldName=item.getFieldName();
+                if("newsId".equals(fieldName)){
+                    if(StringUtil.isNotEmpty(item.getString("utf-8"))){
+                        news.setNewsId(Integer.parseInt(item.getString("utf-8")));
+                    }
+                }
+                if("title".equals(fieldName)){
+                    news.setTitle(item.getString("utf-8"));
+                }
+                if("content".equals(fieldName)){
+                    news.setContent(item.getString("utf-8"));
+                }
+                if("author".equals(fieldName)){
+                    news.setAuthor(item.getString("utf-8"));
+                }
+                if("typeId".equals(fieldName)){
+                    news.setTypeId(Integer.parseInt(item.getString("utf-8")));
+                }
+                if("isHead".equals(fieldName)){
+                    news.setIsHead(Integer.parseInt(item.getString("utf-8")));
+                }
+                if("isImage".equals(fieldName)){
+                    news.setIsImage(Integer.parseInt(item.getString("utf-8")));
+                }
+                if("isHot".equals(fieldName)){
+                    news.setIsHot(Integer.parseInt(item.getString("utf-8")));
+                }
+            }else if(!"".equals(item.getName())){
+                try {
+                    String imageName= DateUtil.getCurrentDateStr();
+                    news.setImageName(imageName+"."+item.getName().split("\\.")[1]);
+                    String filePath=PropertiesUtil.getValue("imagePath")+imageName+"."+item.getName().split("\\.")[1];
+                    item.write(new File(filePath));
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        if(news.getNewsId()!=0){
+            newsService.update(news);
+        }else{
+            newsService.newsAdd(news);
+        }
+        return"redirect:newsList.do";
+    }
+
+    @RequestMapping(value = "/newsList",method = RequestMethod.GET)
+    public String newsList(final Model model,String page,News news,HttpServletRequest request) {
+        if(StringUtil.isEmpty(page)){
+            page = "1";
+        }
+        PageHelper.startPage(Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")));
+        List<News> newsBackList = newsService.selectAll(news);
+        PageInfo<News> pageInfo = new PageInfo<News>(newsBackList);
+        int total = (int)pageInfo.getTotal();
+        String pageCode=PageUtil.getPagation(request.getContextPath()+"/newsList.do?action=backList", total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")));
+        model.addAttribute("pageCode",pageCode);
+        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻维护"));
+        model.addAttribute("newsBackList",newsBackList);
+        model.addAttribute("mainPage", "/background/news/newsList.jsp");
+        return "/background/mainTemp";
+    }
+
+    @RequestMapping(value = "/newsListA",method = RequestMethod.GET)
+    public String commentListA(final Model model,News news) {
+        model.addAttribute("aaa",news);
+        return"forward:newsList.do";
+    }
+
+    @RequestMapping(value = "/newsDelete",method = RequestMethod.POST)
+    public  void NewsDelete(final Model model,News news,HttpServletResponse response)throws Exception {
+        int delNums = newsService.deleteNewsById(news);
+        boolean flag;
+        if(delNums>0){
+            flag = true;
+        }else {
+            flag = false;
+        }
+        ResponseUtil.write(flag,response);
     }
 
 }

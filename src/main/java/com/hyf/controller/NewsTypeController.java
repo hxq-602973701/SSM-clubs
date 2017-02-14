@@ -6,6 +6,8 @@ import com.hyf.entity.NewsType;
 import com.hyf.service.LinkService;
 import com.hyf.service.NewsService;
 import com.hyf.service.NewsTypeService;
+import com.hyf.util.NavUtil;
+import com.hyf.util.ResponseUtil;
 import com.hyf.util.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,4 +71,50 @@ public class NewsTypeController {
         model.addAttribute("linkList",linkList);
         return  "/index";
     }
+
+    @RequestMapping(value = "/newsType",method = RequestMethod.GET)
+    public String preSaveNewsType(final Model model,NewsType newsType) {
+        if(newsType.getNewsTypeId()==null){
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别管理"));
+        }else{
+            newsType = newsTypeService.getNesTypeById(newsType);
+            model.addAttribute("newsType",newsType);
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别修改"));
+        }
+        model.addAttribute("mainPage","/background/newsType/newsTypeSave.jsp");
+        return "/background/mainTemp";
+    }
+
+    @RequestMapping(value = "/newsTypeSave",method = RequestMethod.POST)
+    public String SaveLink(final Model model,NewsType newsType) {
+        if (newsType.getNewsTypeId() == null) {
+            newsTypeService.save(newsType);
+        }else{
+            newsTypeService.updateByNewsTypeId(newsType);
+        }
+        return"redirect:newsTypeList.do";
+    }
+
+    @RequestMapping(value = "/newsTypeList",method = RequestMethod.GET)
+    public String LnkList(final Model model) {
+        List<NewsType> newsTypeBackList = newsTypeService.selectAll();
+        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("车友类别管理", "车友类别维护"));
+        model.addAttribute("newsTypeBackList",newsTypeBackList);
+        model.addAttribute("mainPage", "/background/newsType/newsTypeList.jsp");
+        return "/background/mainTemp";
+    }
+
+    @RequestMapping(value = "/newsTypeDelete",method = RequestMethod.POST)
+    public  void newsTypeDelete(final Model model,NewsType newsType,HttpServletResponse response)throws Exception {
+        int delNums = newsTypeService.deleteNewsTypeById(newsType);
+        boolean flag;
+        if(delNums>0){
+            flag = true;
+        }else {
+            flag = false;
+        }
+        ResponseUtil.write(flag,response);
+    }
+
+
 }

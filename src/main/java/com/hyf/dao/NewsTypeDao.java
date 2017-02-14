@@ -13,4 +13,14 @@ public interface NewsTypeDao {
     List<NewsType> selectByNewsType(News news);
 
     NewsType selectByNewsTypeId(News news);
+
+    NewsType getNesTypeById(NewsType newsType);
+
+    void save(NewsType newsType);
+
+    void updateByNewsTypeId(NewsType newsType);
+
+    List<NewsType> selectAll();
+
+    int deleteNewsTypeById(NewsType newsType);
 }

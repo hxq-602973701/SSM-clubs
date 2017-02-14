@@ -19,4 +19,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				nt.newsTypeId=#{typeId}
 		</where>
 	</select>
+
+	<select id="getNesTypeById"  resultMap="BaseResultMap">
+		select * from t_newstype nt
+		<where>
+			nt.newsTypeId=#{newsTypeId}
+		</where>
+	</select>
+
+	<select id="selectAll"  resultMap="BaseResultMap">
+		SELECT * from t_newstype
+	</select>
+
+	<update id="updateByNewsTypeId">
+		UPDATE t_newstype  set typeName = #{typeName} WHERE newsTypeId = #{newsTypeId}
+	</update>
+
+	<insert id="save" >
+		INSERT INTO t_newstype(newsTypeId,typeName) VALUES (#{newsTypeId},#{typeName})
+	</insert>
+
+	<delete id="deleteNewsTypeById">
+		DELETE FROM t_newstype WHERE newsTypeId = #{newsTypeId}
+	</delete>
 </mapper> 

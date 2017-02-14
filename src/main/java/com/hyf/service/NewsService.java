@@ -91,4 +91,12 @@ public interface NewsService {
      * @param news
      */
     void updateByClick(News news);
+
+    void newsAdd(News news);
+
+    List<News> selectAll(News news);
+
+    void update(News news);
+
+    int deleteNewsById(News news);
 }

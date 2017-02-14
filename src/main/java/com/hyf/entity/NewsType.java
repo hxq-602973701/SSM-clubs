@@ -2,14 +2,14 @@ package com.hyf.entity;
 
 public class NewsType {
 
-	private int newsTypeId;
+	private Integer newsTypeId;
 	private String typeName;
 
-	public int getNewsTypeId() {
+	public Integer getNewsTypeId() {
 		return newsTypeId;
 	}
 
-	public void setNewsTypeId(int newsTypeId) {
+	public void setNewsTypeId(Integer newsTypeId) {
 		this.newsTypeId = newsTypeId;
 	}
 

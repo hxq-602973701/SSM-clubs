@@ -40,12 +40,13 @@ public class LinkController {
     }
 
     @RequestMapping(value = "/linkSave",method = RequestMethod.POST)
-    public void SaveLink(final Model model,Link link) {
+    public String SaveLink(final Model model,Link link) {
         if (link.getLinkId() == null) {
             linkService.save(link);
         }else{
             linkService.updateByLinkId(link);
         }
+        return"redirect:linkList.do";
     }
 
 

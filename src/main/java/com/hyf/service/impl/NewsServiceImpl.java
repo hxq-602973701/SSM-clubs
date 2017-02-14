@@ -82,4 +82,24 @@ public class NewsServiceImpl implements NewsService {
     public void updateByClick(News news) {
         newsDao.updateByClick(news);
     }
+
+    @Override
+    public void newsAdd(News news) {
+        newsDao.newsAdd(news);
+    }
+
+    @Override
+    public List<News> selectAll(News news) {
+        return newsDao.selectAll(news);
+    }
+
+    @Override
+    public void update(News news) {
+        newsDao.update(news);
+    }
+
+    @Override
+    public int deleteNewsById(News news) {
+        return newsDao.deleteNewsById(news);
+    }
 }

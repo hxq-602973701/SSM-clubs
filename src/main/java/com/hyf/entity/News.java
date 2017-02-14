@@ -18,6 +18,10 @@ public class News {
 	private int isHot;
 
 	private int total;
+	private NewsType newsType;
+	private String s_bPublishDate;
+	private String s_aPublishDate;
+
 
 	public News(int newsId, String title) {
 		super();
@@ -130,5 +134,29 @@ public class News {
 
 	public void setTotal(int total) {
 		this.total = total;
+	}
+
+	public NewsType getNewsType() {
+		return newsType;
+	}
+
+	public void setNewsType(NewsType newsType) {
+		this.newsType = newsType;
+	}
+
+	public String getS_bPublishDate() {
+		return s_bPublishDate;
+	}
+
+	public void setS_bPublishDate(String s_bPublishDate) {
+		this.s_bPublishDate = s_bPublishDate;
+	}
+
+	public String getS_aPublishDate() {
+		return s_aPublishDate;
+	}
+
+	public void setS_aPublishDate(String s_aPublishDate) {
+		this.s_aPublishDate = s_aPublishDate;
 	}
 }
