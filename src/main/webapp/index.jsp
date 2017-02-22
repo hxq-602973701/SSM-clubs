@@ -15,6 +15,7 @@
 <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
 </head>
 <body>
+
 <div class="container">
 <jsp:include page="/foreground/common/head.jsp"/>
 

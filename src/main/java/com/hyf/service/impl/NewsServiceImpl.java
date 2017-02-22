@@ -102,4 +102,9 @@ public class NewsServiceImpl implements NewsService {
     public int deleteNewsById(News news) {
         return newsDao.deleteNewsById(news);
     }
+
+    @Override
+    public int updateInfo(News news) {
+        return newsDao.updateInfo(news);
+    }
 }

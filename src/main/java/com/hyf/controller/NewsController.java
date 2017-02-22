@@ -131,7 +131,7 @@ public class NewsController {
     }
 
     @RequestMapping(value = "/newsSave",method = RequestMethod.POST)
-    public String SaveNews(final Model model,News news,HttpServletRequest request) throws ServletException, IOException {
+    public String SaveNews(final Model model,News news,HttpServletRequest request,int type) throws ServletException, IOException {
         FileItemFactory factory=new DiskFileItemFactory();
         ServletFileUpload upload=new ServletFileUpload(factory);
         List<FileItem> items=null;
@@ -189,7 +189,12 @@ public class NewsController {
         }else{
             newsService.newsAdd(news);
         }
-        return"redirect:newsList.do";
+        if(type!=1){
+           return "addInfoSuccess";
+        }else{
+            return"redirect:newsList.do";
+        }
+
     }
 
     @RequestMapping(value = "/newsList",method = RequestMethod.GET)
@@ -225,6 +230,28 @@ public class NewsController {
             flag = false;
         }
         ResponseUtil.write(flag,response);
+    }
+
+    /**
+     * 审核
+     * @param model
+     * @param
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value="/info/check-info",method = RequestMethod.POST)
+    public String checkInfo(Model model, News news, HttpServletResponse response) throws  Exception{
+
+        int resultNum =  newsService.updateInfo(news);
+        boolean delFlag;
+        if(resultNum==1){
+            delFlag = true;
+        }else {
+            delFlag = false;
+        }
+        ResponseUtil.write(delFlag,response);
+        return null;
     }
 
 }

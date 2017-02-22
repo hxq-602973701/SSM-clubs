@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="isImage" column="isImage"/>
 		<result property="imageName" column="imageName"/>
 		<result property="isHot" column="isHot"/>
+        <result property="state" column="state"/>
 
         <result property="total" column="total"/>
         <association property="newsType" resultMap="BaseNewsTypeResult"/>
@@ -33,26 +34,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectByCommon"  resultMap="BaseResultMap">
 		SELECT * from t_news n
 		<where>
-			  n.isImage=1 order by n.publishDate desc limit 0,5
+			  n.isImage=1 AND  n.state = 1 order by n.publishDate desc limit 0,5
 		</where>
 	</select>
 
     <select id="selectByHead"  resultMap="BaseResultMap">
         SELECT * from t_news n
         <where>
-              n.isHead=1 order by n.publishDate desc limit 0,1
+              n.isHead=1 and n.state = 1 order by n.publishDate desc limit 0,1
         </where>
     </select>
 
     <select id="selectByCurrent"  resultMap="BaseResultMap">
-        SELECT * from t_news n
+        SELECT * from t_news n WHERE n.state = 1
            order by n.publishDate desc limit 0,8
     </select>
 
     <select id="selectByHot"  resultMap="BaseResultMap">
         SELECT * from t_news n
         <where>
-            n.isHot=1 order by n.publishDate desc limit 0,8
+            n.isHot=1 AND n.state = 1 order by n.publishDate desc limit 0,8
         </where>
     </select>
 
@@ -61,11 +62,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             n.typeId = #{typeId}
         </where>
+        AND  n.state = 1
         order by n.publishDate desc limit 0,8
     </select>
 
     <select id="selectByClick"  resultMap="BaseResultMap">
-        SELECT * from t_news n
+        SELECT * from t_news n  WHERE  n.state = 1
         order by n.click desc limit 0,8
     </select>
 
@@ -93,6 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 n.typeId = #{typeId}
             </if>
         </where>
+        AND n.state = 1
         order by n.publishDate desc
     </select>
 
@@ -107,11 +110,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="getUpAndDownPageId"  resultMap="BaseResultMap">
-        SELECT * from t_news n  where n.newsId &lt; #{newsId} ORDER BY n.newsId DESC limit 1
+        SELECT * from t_news n  where n.newsId &lt; #{newsId} AND n.state = 1 ORDER BY n.newsId DESC limit 1
     </select>
 
     <select id="getDownPageId"  resultMap="BaseResultMap">
-        SELECT * from t_news n  where n.newsId &gt; #{newsId} ORDER BY n.newsId ASC limit 1
+        SELECT * from t_news n  where n.newsId &gt; #{newsId} and n.state = 1 ORDER BY n.newsId ASC limit 1
     </select>
 
     <update id="updateByClick">
@@ -134,6 +137,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 AND n.title LIKE concat(concat('%',#{title}),'%')
             </if>
         </where>
+        ORDER BY n.publishDate DESC
     </select>
 
     <update id="update">
@@ -143,4 +147,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteNewsById">
         DELETE FROM t_news WHERE newsId = #{newsId}
     </delete>
+
+    <update id="updateInfo" parameterType="News">
+        UPDATE  t_news t set t.state = 1 where t.newsId = #{newsId}
+    </update>
 </mapper>

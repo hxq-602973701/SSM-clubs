@@ -34,39 +34,45 @@ public class NewsTypeController {
     @Resource
     private LinkService linkService;
 
-    //将数据放在static中，在Spring容器启动时加载，只加载一次
+    //�����ݷ���static�У���Spring��������ʱ���أ�ֻ����һ��
     public static  List<NewsType> newsTypeList = new ArrayList<>();
     public static  List<News> newestNewsList = new ArrayList<>();
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String getNewsTypeList(final Model model, News news){
-        //新闻类别显示
+        //���������ʾ
         newsTypeList = newsTypeService.selectByNewsType(news);
         model.addAttribute("newsTypeList",newsTypeList);
-        //每个新闻类别下的新闻
+        //ÿ����������µ�����
         List allIndexNewsList = new ArrayList();
         if(newsTypeList!=null && newsTypeList.size()!=0){
-            newsTypeList.parallelStream().forEach(newsType -> {
+            for(NewsType newsType:newsTypeList){
                 List<News> newsList = newsService.selectByNewsTypeId(newsType.getNewsTypeId());
                 allIndexNewsList.add(newsList);
-            });
+            }
+           /* newsTypeList.parallelStream().forEach(newsType -> {
+                List<News> newsList = newsService.selectByNewsTypeId(newsType.getNewsTypeId());
+                allIndexNewsList.add(newsList);
+            });*/
         }
         model.addAttribute("allIndexNewsList",allIndexNewsList);
-        //左侧轮播显示
+        //����ֲ���ʾ
         List<News>  imageNewsList = newsService.selectByCommon(news);
         model.addAttribute("imageNewsList",imageNewsList);
-        //头条新闻显示
+        //ͷ��������ʾ
         List<News>  headNewsList = newsService.selectByHead(news);
-        News headNews = headNewsList.get(0);
-        headNews.setContent(StringUtil.Html2Text(headNews.getContent()));
-        model.addAttribute("headNews",headNews);
-        //最近的新闻
+        if(headNewsList.size()!=0){
+            News headNews = headNewsList.get(0);
+            headNews.setContent(StringUtil.Html2Text(headNews.getContent()));
+            model.addAttribute("headNews",headNews);
+        }
+        //���������
         newestNewsList = newsService.selectByCurrent(news);
         model.addAttribute("newestNewsList",newestNewsList);
-        //热点新闻
+        //�ȵ�����
         List<News> hotSpotNewsList = newsService.selectByHot(news);
         model.addAttribute("hotSpotNewsList",hotSpotNewsList);
-        //友情链接
+        //��������
         List<Link> linkList = linkService.selectAll();
         model.addAttribute("linkList",linkList);
         return  "/index";
@@ -75,11 +81,11 @@ public class NewsTypeController {
     @RequestMapping(value = "/newsType",method = RequestMethod.GET)
     public String preSaveNewsType(final Model model,NewsType newsType) {
         if(newsType.getNewsTypeId()==null){
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别管理"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("����������", "����������"));
         }else{
             newsType = newsTypeService.getNesTypeById(newsType);
             model.addAttribute("newsType",newsType);
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别修改"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("����������", "��������޸�"));
         }
         model.addAttribute("mainPage","/background/newsType/newsTypeSave.jsp");
         return "/background/mainTemp";
@@ -98,7 +104,7 @@ public class NewsTypeController {
     @RequestMapping(value = "/newsTypeList",method = RequestMethod.GET)
     public String LnkList(final Model model) {
         List<NewsType> newsTypeBackList = newsTypeService.selectAll();
-        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("车友类别管理", "车友类别维护"));
+        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("����������", "�������ά��"));
         model.addAttribute("newsTypeBackList",newsTypeBackList);
         model.addAttribute("mainPage", "/background/newsType/newsTypeList.jsp");
         return "/background/mainTemp";

@@ -20,6 +20,20 @@
 			);
 		}
 	}
+//审核
+	function newsVerify(newsId){
+		$.post("info/check-info.do",{newsId:newsId},
+				function(checkFlag){
+					var flag=JSON.parse(checkFlag);
+					if(flag){
+						alert("审核成功！");
+						window.location.reload();
+					}else{
+						alert("审核失败！");
+					}
+				}
+		);
+	}
 </script>
 <body>
 <div class="data_list backMain">
@@ -51,7 +65,11 @@
 					<td>${newsBack.title }</td>
 					<td>${newsBack.typeName }</td>
 					<td><fmt:formatDate value="${newsBack.publishDate }" type="date" pattern="yyyy-MM-dd"/></td>
-					<td><button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location.href='newsPre.do?action=preSave&newsId=${newsBack.newsId}'">修改</button>&nbsp;<button class="btn btn-mini btn-danger" type="button" onclick="newsDelete(${newsBack.newsId})">删除</button></td>
+					<td>
+					<button class="btn btn-mini btn-info" type="button" onclick="javascript:window.location.href='newsPre.do?action=preSave&newsId=${newsBack.newsId}'">修改
+					</button>&nbsp;<button class="btn btn-mini btn-danger" type="button" onclick="newsDelete(${newsBack.newsId})">删除</button>
+					</button>&nbsp;	<input type="button" class="btn btn-mini btn-danger" onclick="newsVerify('${newsBack.newsId}')" value="√通过审核" ${newsBack.state==1?"disabled":"" }/>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

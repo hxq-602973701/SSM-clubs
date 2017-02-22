@@ -15,8 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectByNewsTypeId"  resultMap="BaseResultMap">
 		select * from t_newstype nt
 		<where>
-
-				nt.newsTypeId=#{typeId}
+			  nt.newsTypeId=#{typeId}
 		</where>
 	</select>
 

@@ -12,7 +12,6 @@
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
 <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
-
 	<script src="${pageContext.request.contextPath}/js/ckeditor/ckeditor.js"></script>
 	<script src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
 <%

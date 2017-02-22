@@ -16,6 +16,7 @@ public class News {
 	private int isImage;
 	private String imageName;
 	private int isHot;
+	private int state;
 
 	private int total;
 	private NewsType newsType;
@@ -158,5 +159,13 @@ public class News {
 
 	public void setS_aPublishDate(String s_aPublishDate) {
 		this.s_aPublishDate = s_aPublishDate;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
 	}
 }
