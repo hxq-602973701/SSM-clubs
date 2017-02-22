@@ -16,6 +16,8 @@
 					<li><a href="news.do?action=list&typeId=${newsType.newsTypeId }">${newsType.typeName }</a></li>
 				</c:forEach>
 		    </ul>
+			  <a class="brand" href="goBack.do">进入后台</a>
+			  <a class="brand" href="goBack.do">进入后台</a>
 		  </div>
 		</div>
 	</div>

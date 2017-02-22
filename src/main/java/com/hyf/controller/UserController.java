@@ -38,7 +38,7 @@ public class UserController {
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String loginOut(HttpServletRequest request) {
             HttpSession session =  request.getSession();
-            session.removeAttribute("currentUser");
+        session.removeAttribute("currentUser");
             return "/background/login";
     }
 
