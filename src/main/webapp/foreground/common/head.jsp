@@ -19,6 +19,7 @@
 		    </ul>
 			  <a class="brand" href="goBack.do">进入后台</a>
 			  <a class="brand" href="sendMsg.do">发布信息</a>
+			  <a class="brand" href="leaveMsg.do">发布留言</a>
 		  </div>
 		</div>
 	</div>

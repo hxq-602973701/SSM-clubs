@@ -10,7 +10,7 @@
 		<div class="news_title"><h3>${news.title }</h3></div>
 		<div class="news_info">
 			发布时间：[<fmt:formatDate value="${news.publishDate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>]&nbsp;&nbsp;作者：${news.author }
-			&nbsp;&nbsp;新闻类别：[${news.typeName }]&nbsp;&nbsp;阅读次数：${news.click }
+			&nbsp;&nbsp;车友动态类别：[${news.typeName }]&nbsp;&nbsp;阅读次数：${news.click }
 		</div>
 		<div class="news_content">
 			${news.content }

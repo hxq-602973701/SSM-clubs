@@ -6,8 +6,11 @@
 
 </head>
 <body>
+<%--<%--%>
+		<%--response.sendRedirect("/index.do");--%>
+<%--%>--%>
 <%
-		response.sendRedirect("/index.do");
+	response.sendRedirect("/toIndex.do");
 %>
 </body>
 

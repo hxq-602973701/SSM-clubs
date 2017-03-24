@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyf.dao.LeaveDao">
+	<resultMap type="Leave" id="BaseResultMap">
+		<result property="leaveId" column="leave_id"/>
+		<result property="leaveTitle" column="leave_title"/>
+		<result property="leaveContent" column="leave_content"/>
+		<result property="delFlag" column="del_flag"/>
+		<result property="leaveDate" column="leave_date"/>
+		<result property="userIp" column="user_ip"/>
+	</resultMap>
+
+	<insert id="save">
+		INSERT  INTO t_leave(leave_id,leave_title,leave_content,del_flag,leave_date,user_ip)
+		VALUES (#{leaveId},#{leaveTitle},#{leaveContent},#{delFlag},#{leaveDate},#{userIp})
+	</insert>
+
+	<select id="select" resultMap="BaseResultMap">
+			select * from t_leave;
+	</select>
+</mapper> 

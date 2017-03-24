@@ -23,7 +23,7 @@
 	</div>
 	<div class="span4">
 		<div class="data_list right_news_list">
-			<div class="dataHeader">最新新闻</div>
+			<div class="dataHeader">车友最新动态</div>
 			<div class="datas">
 				<ul>
 					<c:forEach var="newestNews" items="${newestNewsList }">
@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="data_list right_news_list">
-			<div class="dataHeader">热门新闻</div>
+			<div class="dataHeader">热门</div>
 			<div class="datas">
 				<ul>
 					<c:forEach var="hotNews" items="${hotNewsList }">

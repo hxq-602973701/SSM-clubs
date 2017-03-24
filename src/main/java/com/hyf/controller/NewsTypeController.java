@@ -34,16 +34,16 @@ public class NewsTypeController {
     @Resource
     private LinkService linkService;
 
-    //�����ݷ���static�У���Spring��������ʱ���أ�ֻ����һ��
+    //?????????static?????Spring??????????????????????
     public static  List<NewsType> newsTypeList = new ArrayList<>();
     public static  List<News> newestNewsList = new ArrayList<>();
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String getNewsTypeList(final Model model, News news){
-        //���������ʾ
+        //??????????
         newsTypeList = newsTypeService.selectByNewsType(news);
         model.addAttribute("newsTypeList",newsTypeList);
-        //ÿ����������µ�����
+        //?????????????????
         List allIndexNewsList = new ArrayList();
         if(newsTypeList!=null && newsTypeList.size()!=0){
             for(NewsType newsType:newsTypeList){
@@ -56,23 +56,23 @@ public class NewsTypeController {
             });*/
         }
         model.addAttribute("allIndexNewsList",allIndexNewsList);
-        //����ֲ���ʾ
+        //?????????
         List<News>  imageNewsList = newsService.selectByCommon(news);
         model.addAttribute("imageNewsList",imageNewsList);
-        //ͷ��������ʾ
+        //??????????
         List<News>  headNewsList = newsService.selectByHead(news);
         if(headNewsList.size()!=0){
             News headNews = headNewsList.get(0);
             headNews.setContent(StringUtil.Html2Text(headNews.getContent()));
             model.addAttribute("headNews",headNews);
         }
-        //���������
+        //?????????
         newestNewsList = newsService.selectByCurrent(news);
         model.addAttribute("newestNewsList",newestNewsList);
-        //�ȵ�����
+        //???????
         List<News> hotSpotNewsList = newsService.selectByHot(news);
         model.addAttribute("hotSpotNewsList",hotSpotNewsList);
-        //��������
+        //????????
         List<Link> linkList = linkService.selectAll();
         model.addAttribute("linkList",linkList);
         return  "/index";
@@ -81,11 +81,11 @@ public class NewsTypeController {
     @RequestMapping(value = "/newsType",method = RequestMethod.GET)
     public String preSaveNewsType(final Model model,NewsType newsType) {
         if(newsType.getNewsTypeId()==null){
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("����������", "����������"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("??????????", "??????????"));
         }else{
             newsType = newsTypeService.getNesTypeById(newsType);
             model.addAttribute("newsType",newsType);
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("����������", "��������޸�"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("??????????", "??????????"));
         }
         model.addAttribute("mainPage","/background/newsType/newsTypeSave.jsp");
         return "/background/mainTemp";
@@ -104,7 +104,7 @@ public class NewsTypeController {
     @RequestMapping(value = "/newsTypeList",method = RequestMethod.GET)
     public String LnkList(final Model model) {
         List<NewsType> newsTypeBackList = newsTypeService.selectAll();
-        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("����������", "�������ά��"));
+        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("??????????", "??????????"));
         model.addAttribute("newsTypeBackList",newsTypeBackList);
         model.addAttribute("mainPage", "/background/newsType/newsTypeList.jsp");
         return "/background/mainTemp";

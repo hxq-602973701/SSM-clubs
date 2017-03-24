@@ -7,4 +7,10 @@ import com.hyf.entity.User;
  */
 public interface UserDao {
     User login(User user);
+
+    boolean isLogin(User user);
+
+    boolean isRegist(User user);
+
+    void registe(User user);
 }

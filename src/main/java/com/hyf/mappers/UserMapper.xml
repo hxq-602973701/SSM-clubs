@@ -7,9 +7,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="id" column="id"/>
 		<result property="userName" column="userName"/>
 		<result property="password" column="password"/>
+		<result property="email" column="email"/>
 	</resultMap>
 	
 	<select id="login"  resultMap="BaseResultMap">
 			SELECT * from t_user u where u.userName=#{userName} AND u.password = #{password}
 	</select>
+
+	<select id="isLogin"  resultType="boolean">
+		SELECT COUNT(1) from t_user u where u.userName=#{userName}
+	</select>
+
+	<select id="isRegist"  resultType="boolean">
+		SELECT COUNT(1) from t_user u where u.email=#{email}
+	</select>
+
+	<insert id="registe" >
+		INSERT  INTO t_user (userName,password,email) VALUES (#{userName},#{password},#{email})
+	</insert>
 </mapper> 

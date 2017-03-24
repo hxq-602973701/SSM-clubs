@@ -43,7 +43,7 @@
 	<div class="span3">
 		<div class="newsMenu">
 			<ul class="nav nav-tabs nav-stacked">
-				  <li><a href="/welcome.jsp"><strong>主页</strong></a></li>
+				  <li><a href="index.do"><strong>主页</strong></a></li>
 				  <li><a href="#"><strong>新闻管理</strong></a></li>
 				<li><a href="newsPre.do">&nbsp;&nbsp;新闻添加</a></li>
 				<li><a href="newsList.do">&nbsp;&nbsp;新闻维护</a></li>

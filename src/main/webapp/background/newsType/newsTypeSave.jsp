@@ -26,7 +26,7 @@
 			<table cellpadding="5">
 				<tr>
 					<td>
-						<label>新闻类别名称：</label>
+						<label>车友动态类别名称：</label>
 					</td>
 					<td>
 						<input type="text" id="typeName" name="typeName" value="${newsType.typeName }"/>

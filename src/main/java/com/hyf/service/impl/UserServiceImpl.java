@@ -19,4 +19,19 @@ public class UserServiceImpl implements UserService {
     public User login(User user) {
         return userDao.login(user);
     }
+
+    @Override
+    public boolean isLogin(User user) {
+        return userDao.isLogin(user);
+    }
+
+    @Override
+    public boolean isRegist(User user) {
+        return userDao.isRegist(user);
+    }
+
+    @Override
+    public void registe(User user) {
+        userDao.registe(user);
+    }
 }
