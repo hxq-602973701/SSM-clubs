@@ -6,7 +6,7 @@
 </head>
 <script type="text/javascript">
 	function newsDelete(newsId){
-		if(confirm("确认要删除这条新闻吗？")){
+		if(confirm("确认要删除这条信息吗？")){
 			$.post("newsDelete.do?action=delete",{newsId:newsId},
 					function(delFlag){
 						var flag=eval('('+delFlag+')');
@@ -42,7 +42,7 @@
 	</div>
 	<div class="search_content" style="vertical-align: middle;">
 		<form action="newsListA.do" method="get">
-			新闻标题：<input type="text" id="title" name="title" style="width:180px" value="${title }"/>&nbsp;&nbsp;
+			信息标题：<input type="text" id="title" name="title" style="width:180px" value="${title }"/>&nbsp;&nbsp;
 			发布日期：<input type="text" id="s_bPublishDate" name="s_bPublishDate" class="Wdate" onclick="WdatePicker()" style="width: 100px;" value="${s_bPublishDate }"/>
 			&nbsp;到&nbsp;<input type="text" id="s_aPublishDate" name="s_aPublishDate" class="Wdate" onclick="WdatePicker()" style="width: 100px;" value="${s_aPublishDate }"/>
 			&nbsp;&nbsp;<button class="btn btn-mini btn-primary" type="submit" style="margin-top: -8px;">查询</button>
@@ -53,8 +53,8 @@
 			<tr>
 				<th><input type="checkbox" id="checkedAll"/></th>
 				<th>序号</th>
-				<th>新闻标题</th>
-				<th>新闻类别</th>
+				<th>信息标题</th>
+				<th>信息类别</th>
 				<th>发布时间</th>
 				<th>操作</th>
 			</tr>

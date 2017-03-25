@@ -61,7 +61,7 @@
 			<table cellpadding="5" width="100%">
 				<tr>
 					<td width="80px">
-						<label>新闻标题：</label>
+						<label>信息标题：</label>
 					</td>
 					<td>
 						<input type="text" id="title" name="title" class="input-xxlarge" value="${news.title }"/>
@@ -69,7 +69,7 @@
 				</tr>
 				<tr>
 					<td>
-						<label>新闻作者：</label>
+						<label>发布人：</label>
 					</td>
 					<td>
 						<input type="text" id="author" name="author" value="${news.author }"/>
@@ -77,11 +77,11 @@
 				</tr>
 				<tr>
 					<td>
-						<label>新闻类别：</label>
+						<label>信息类别：</label>
 					</td>
 					<td>
 						<select id="typeId" name="typeId">
-							<option value="">请选择新闻类别</option>
+							<option value="">请选择信息类别</option>
 							<c:forEach var="newsType" items="${newsTypeList }">
 								<option value="${newsType.newsTypeId }" ${newsType.newsTypeId==news.typeId?'selected':'' }>${newsType.typeName }</option>
 							</c:forEach>
@@ -90,7 +90,7 @@
 				</tr>
 				<tr>
 					<td>
-						<label>新闻属性：</label>
+						<label>信息属性：</label>
 					</td>
 					<td>
 						<label class="checkbox inline">
@@ -115,7 +115,7 @@
 				</tr>
 				<tr>
 					<td valign="top">
-						<label>新闻内容：</label>
+						<label>内容：</label>
 					</td>
 					<td>
 						<textarea class="ckeditor" id="content" name="content">${news.content }</textarea>
@@ -126,7 +126,7 @@
 						<input type="hidden" id="newsId" name="newsId" value="${news.newsId }"/>&nbsp;
 					</td>
 					<td>
-						<input type="submit" class="btn btn-primary" value="保存新闻"/>&nbsp;&nbsp;
+						<input type="submit" class="btn btn-primary" value="保存"/>&nbsp;&nbsp;
 						<input type="button" class="btn btn-primary" value="返回" onclick="javascript:history.back()"/>&nbsp;&nbsp;<font id="error" color="red">${error }</font>
 					</td>
 				</tr>
