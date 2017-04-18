@@ -107,7 +107,7 @@ public class UserController {
 
     @RequestMapping(value = "/UserRegister",method = RequestMethod.POST)
     public String regist( Model model,User user) throws Exception {
-       userService.registe(user);
+        userService.registe(user);
         model.addAttribute("code","success");
         return "/foreground/user/msg";
     }

@@ -58,7 +58,7 @@
 	<div class="main">
 	  <div><img src="<c:url value='/foreground/user/images/logo.gif'/>" /></div>
 	  <div>
-	    <div class="imageDiv"><img class="img" src="<c:url value='/foreground/user/images/zj.png'/>"/></div>
+	    <%--<div class="imageDiv"><img class="img" src="<c:url value='/foreground/user/images/zj.png'/>"/></div>--%>
         <div class="login1">
 	      <div class="login2">
             <div class="loginTopDiv">
