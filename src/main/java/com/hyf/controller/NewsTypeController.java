@@ -81,11 +81,11 @@ public class NewsTypeController {
     @RequestMapping(value = "/newsType",method = RequestMethod.GET)
     public String preSaveNewsType(final Model model,NewsType newsType) {
         if(newsType.getNewsTypeId()==null){
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("??????????", "??????????"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别添加 "));
         }else{
             newsType = newsTypeService.getNesTypeById(newsType);
             model.addAttribute("newsType",newsType);
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("??????????", "??????????"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别维护"));
         }
         model.addAttribute("mainPage","/background/newsType/newsTypeSave.jsp");
         return "/background/mainTemp";
@@ -104,7 +104,7 @@ public class NewsTypeController {
     @RequestMapping(value = "/newsTypeList",method = RequestMethod.GET)
     public String LnkList(final Model model) {
         List<NewsType> newsTypeBackList = newsTypeService.selectAll();
-        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("??????????", "??????????"));
+        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别维护"));
         model.addAttribute("newsTypeBackList",newsTypeBackList);
         model.addAttribute("mainPage", "/background/newsType/newsTypeList.jsp");
         return "/background/mainTemp";

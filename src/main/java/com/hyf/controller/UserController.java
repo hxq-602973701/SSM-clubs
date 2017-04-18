@@ -94,7 +94,9 @@ public class UserController {
             ResponseUtil.write(flag,response);
         }else if(type==3){
           String vCode = (String) request.getSession().getAttribute("vCode");
-            if(!vCode.equals(verifyCode)){
+            String reallyCode = vCode.toUpperCase();
+            String reallyVerifyCode = verifyCode.toUpperCase();
+            if(!reallyCode.equals(reallyVerifyCode)){
                 flag = false;
                 ResponseUtil.write(flag,response);
             }else{

@@ -23,7 +23,7 @@
 	<script src="<c:url value='/foreground/user/js/common.js'/>"></script>
 
 <script type="text/javascript">
-	$(function() {/*Map<String(Cookie名称),Cookie(Cookie本身)>*/
+	$(function() {/*Map<String(Cookie名称),Cookie(Cookie本身你是涉啊)>*/
 		// 获取cookie中的用户名
 		var loginname = window.decodeURI("${cookie.loginname.value}");
 		if("${requestScope.user.loginname}") {
@@ -31,6 +31,17 @@
 		}
 		$("#loginname").val(loginname);
 	});
+
+
+    console.log($("#verifyCode").val())
+    $("#submit").submit(function(){
+        console.log($("#verifyCode").val())
+        if($("#verifyCode").val()){
+            console.log(aaa);
+            $("#verifyCodeError").css("display", "");
+            $("#verifyCodeError").text("验证码不能为空！");
+        }
+    });
 
     function _hyz() {
         /*

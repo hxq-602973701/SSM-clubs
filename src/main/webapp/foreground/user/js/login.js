@@ -13,19 +13,36 @@ $(function() {
 	
 	/*
 	 * 2. 给注册按钮添加submit()事件，完成表单校验
+	//  */
+	// $("#submit").submit(function(){
+	// 	$("#msg").text("");
+	// 	var bool = true;
+	// 	$(".input").each(function() {
+	// 		var inputName = $(this).attr("name");
+	// 		if(!invokeValidateFunction(inputName)) {
+	// 			bool = false;
+	// 		}
+	// 	});
+	// 	return bool;
+	// });
+
+	/*
+	 * 5. 表单提交时进行校验
 	 */
-	$("#submit").submit(function(){
-		$("#msg").text("");
-		var bool = true;
-		$(".input").each(function() {
-			var inputName = $(this).attr("name");
-			if(!invokeValidateFunction(inputName)) {
-				bool = false;
-			}
-		});
+	$("#submit").submit(function() {
+		var bool = true;//表示校验通过
+		if(!validateLoginname()) {
+			bool = false;
+		}
+		if(!validateLoginpass()) {
+			bool = false;
+		}
+		if(!validateVerifyCode()) {
+			bool = false;
+		}
+
 		return bool;
 	});
-	
 	/*
 	 * 3. 输入框得到焦点时隐藏错误信息
 	 */
@@ -62,7 +79,7 @@ function validateLoginname() {
 	var value = $("#loginname").val();
 	if(!value) {// 非空校验
 		$("#loginnameError").css("display", "");
-		$("#loginnameError").text("用户名不能为空！");
+		$("#loginnameError").text("用户名不能为空!");
 		bool = false;
 	} else if(value.length < 3 || value.length > 20) {//长度校验
 		$("#loginnameError").css("display", "");
