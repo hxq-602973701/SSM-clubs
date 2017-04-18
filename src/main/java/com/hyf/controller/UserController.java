@@ -29,13 +29,13 @@ public class UserController {
     @RequestMapping(value = "/user",method = RequestMethod.POST)
     public String loginUser(final Model model, User user, HttpServletRequest request) {
         User currentUser = userService.login(user);
-        model.addAttribute("currentUser",currentUser);
+        model.addAttribute("currentFUser",currentUser);
         if(currentUser==null){
             model.addAttribute("error","用户名或者密码错误!");
             return "/background/login";
         }else{
            HttpSession session =  request.getSession();
-           session.setAttribute("currentUser",currentUser);
+           session.setAttribute("currentFUser",currentUser);
             model.addAttribute("mainPage","/background/default.jsp");
             return "/background/mainTemp";
         }
@@ -59,7 +59,7 @@ public class UserController {
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String loginOut(HttpServletRequest request) {
             HttpSession session =  request.getSession();
-        session.removeAttribute("currentUser");
+        session.removeAttribute("currentFUser");
             return "/background/login";
     }
 

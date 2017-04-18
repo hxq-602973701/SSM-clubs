@@ -28,7 +28,7 @@ public class IndexController {
     @RequestMapping(value = "/goBack",method = RequestMethod.GET)
     public String goBack(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if(session.getAttribute("currentUser")!=null){
+        if(session.getAttribute("currentFUser")!=null){
             return "/background/mainTemp";
         }else{
             return "/background/login";

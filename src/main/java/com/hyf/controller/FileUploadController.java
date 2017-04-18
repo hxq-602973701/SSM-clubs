@@ -24,7 +24,7 @@ import java.util.List;
 @Controller
 public class FileUploadController {
 
-    @RequestMapping(value = "/imageUpload",method = RequestMethod.GET)
+    @RequestMapping(value = "/imageUpload",method = RequestMethod.POST)
     public void loginOut(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/controller/CommentController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/controller/LinkController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/controller/NewsTypeController.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/controller/UserController.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/entity/PageBean.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/util/NavUtil.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/util/NavUtil.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/util/PageUtil.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/hyf/util/StringUtil.java" charset="GBK" />

@@ -11,7 +11,7 @@
 
     function reloadyemian()//最好不要用reload这个关键字,因为很容易和其它函数冲突
     {
-        window.location.href="welcome.jsp";
+        window.location.href="index.do";
     }
     window.setTimeout("reloadyemian();",3000);
 </script>
