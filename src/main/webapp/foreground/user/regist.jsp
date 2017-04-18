@@ -33,7 +33,7 @@
       <tr>
         <td class="tdText">用户名：</td>
         <td class="tdInput">
-          <input class="inputClass" type="text" name="userName" id="loginname" value="${form.loginname }"/>
+          <input class="inputClass" type="text" name="userName" id="loginname" value="${form.userName }"/>
         </td>
         <td class="tdError">
           <label class="errorClass" id="loginnameError">${errors.loginname }</label>
@@ -42,7 +42,7 @@
       <tr>
         <td class="tdText">登录密码：</td>
         <td>
-          <input class="inputClass" type="password" name="password" id="loginpass" value="${form.loginpass }"/>
+          <input class="inputClass" type="password" name="password" id="loginpass" value="${form.password }"/>
         </td>
         <td>
           <label class="errorClass" id="loginpassError">${errors.loginpass }</label>
@@ -72,7 +72,7 @@
           <input class="inputClass" type="text" name="verifyCode" id="verifyCode" value="${form.verifyCode }"/>
         </td>
         <td>
-          <label class="errorClass" id="verifyCodeError">${errors.verifyCode}</label>
+          <label class="errorClass" id="verifyCodeError">${errors.verifyCode}${error}</label>
         </td>
       </tr>
       <tr>

@@ -282,7 +282,7 @@ function validateVerifyCode() {
 		async:false,//是否异步请求，如果是异步，那么不会等服务器返回，我们这个函数就向下运行了。
 		cache:false,
 		success:function(result) {
-			if(result) {//如果校验失败
+			if(!result) {//如果校验失败
 				$("#" + id + "Error").text("验证码错误！");
 				showError($("#" + id + "Error"));
 				return false;

@@ -25,9 +25,9 @@
 <script type="text/javascript">
 	$(function() {/*Map<String(Cookie名称),Cookie(Cookie本身你是涉啊)>*/
 		// 获取cookie中的用户名
-		var loginname = window.decodeURI("${cookie.loginname.value}");
-		if("${requestScope.user.loginname}") {
-			loginname = "${requestScope.user.loginname}";
+		var loginname = window.decodeURI("${cookie.userName.value}");
+		if("${requestScope.user.userName}") {
+			loginname = "${requestScope.user.userName}";
 		}
 		$("#loginname").val(loginname);
 	});
@@ -85,7 +85,7 @@
                     </tr>
                     <tr>
                       <td>密　码</td>
-                      <td><input class="input" type="password" name="password" id="loginpass" value="${user.loginpass }"/></td>
+                      <td><input class="input" type="password" name="password" id="loginpass" value="${user.password }"/></td>
                     </tr>
                     <tr>
                       <td height="20">&nbsp;</td>
@@ -101,7 +101,7 @@
                     </tr>
                     <tr>
                       <td height="20px">&nbsp;</td>
-                      <td><label id="verifyCodeError" class="error"></label></td>
+                      <td><label id="verifyCodeError" class="error">${verifyCodeError}</label></td>
                     </tr>
                     <tr>
                       <td>&nbsp;</td>

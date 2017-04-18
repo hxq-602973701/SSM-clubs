@@ -11,6 +11,16 @@ public class User {
 	private String loginpass;
 	private String verifyCode;
 
+	private String reloginpass;
+
+	public String getReloginpass() {
+		return reloginpass;
+	}
+
+	public void setReloginpass(String reloginpass) {
+		this.reloginpass = reloginpass;
+	}
+
 	public String getLoginpass() {
 		return loginpass;
 	}

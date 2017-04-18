@@ -31,6 +31,7 @@ public class UserController {
         User currentUser = userService.login(user);
         model.addAttribute("currentFUser",currentUser);
         if(currentUser==null){
+            model.addAttribute("user",user);
             model.addAttribute("error","用户名或者密码错误!");
             return "/background/login";
         }else{
@@ -45,13 +46,25 @@ public class UserController {
     public String loginForUser(final Model model, User user, HttpServletRequest request) {
         User currentUser = userService.login(user);
         model.addAttribute("currentUser",currentUser);
+        String vCode = (String) request.getSession().getAttribute("vCode");
+        String reallyCode = vCode.toUpperCase();
+        String vCode1 = user.getVerifyCode();
+        String reallyvCode = vCode1.toUpperCase();
         if(currentUser==null){
             model.addAttribute("msg","用户名或者密码错误!");
             model.addAttribute("user",user);
             return "/foreground/user/login";
-        }else{
-            HttpSession session =  request.getSession();
-            session.setAttribute("currentUser",currentUser);
+        }else if("".equals(user.getVerifyCode())){
+            model.addAttribute("verifyCodeError","验证码不能为空!");
+            model.addAttribute("user",user);
+            return "/foreground/user/login";
+        }else if(!reallyCode.equals(reallyvCode)){
+            model.addAttribute("verifyCodeError","验证码错误!");
+            model.addAttribute("user",user);
+            return "/foreground/user/login";
+        }else {
+            HttpSession session = request.getSession();
+            session.setAttribute("currentUser", currentUser);
             return "redirect:index.do";
         }
     }
@@ -96,17 +109,24 @@ public class UserController {
           String vCode = (String) request.getSession().getAttribute("vCode");
             String reallyCode = vCode.toUpperCase();
             String reallyVerifyCode = verifyCode.toUpperCase();
-            if(!reallyCode.equals(reallyVerifyCode)){
-                flag = false;
+            if(reallyCode.equals(reallyVerifyCode)){
                 ResponseUtil.write(flag,response);
             }else{
+                flag = false;
                 ResponseUtil.write(flag,response);
             }
         }
     }
 
     @RequestMapping(value = "/UserRegister",method = RequestMethod.POST)
-    public String regist( Model model,User user) throws Exception {
+    public String regist( Model model,User user,HttpServletRequest request) throws Exception {
+        String vCode = (String) request.getSession().getAttribute("vCode");
+        String reallyCode = vCode.toUpperCase();
+        if(!reallyCode.equals(user.getVerifyCode().toUpperCase())){
+            model.addAttribute("error","错误的验证码!");
+            model.addAttribute("form",user);
+            return "/foreground/user/regist";
+        }
         userService.registe(user);
         model.addAttribute("code","success");
         return "/foreground/user/msg";

@@ -57,8 +57,7 @@
             processData:false,
             contentType:true,
             success:function(data){
-                console.log("over..");
-//                $(".comment").append(data);
+                $(".comment").append(data);
             },
             error:function(e){
                 alert("错误！！");

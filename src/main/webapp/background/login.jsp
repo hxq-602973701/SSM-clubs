@@ -47,12 +47,12 @@
     <form action="${pageContext.request.contextPath}/user.do?action=login" method="post" onsubmit="return checkForm()">
       <p>
         <label>用户名:</label>
-        <input class="text-input" type="text" id="userName" name="userName" value="${userName }"/>
+        <input class="text-input" type="text" id="userName" name="userName" value="${user.userName }"/>
       </p>
       <div class="clear"></div>
       <p>
         <label>密码:</label>
-        <input class="text-input" type="password" id="password" name="password" value="${password }"/>
+        <input class="text-input" type="password" id="password" name="password" value="${user.password }"/>
       </p>
       <div class="clear"></div>
        <font id="error" color="red">${error }</font>   <input class="button" type="submit" value="登录" />
