@@ -21,11 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -206,11 +204,12 @@ public class NewsController {
         List<News> newsBackList = newsService.selectAll(news);
         PageInfo<News> pageInfo = new PageInfo<News>(newsBackList);
         int total = (int)pageInfo.getTotal();
-        String pageCode=PageUtil.getPagation(request.getContextPath()+"/newsList.do?action=backList", total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")));
+        String pageCode=PageUtil.getPagation(request.getContextPath()+"/newsList.do?action=backList", total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")),news);
         model.addAttribute("pageCode",pageCode);
         model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻维护"));
         model.addAttribute("newsBackList",newsBackList);
         model.addAttribute("mainPage", "/background/news/newsList.jsp");
+        model.addAttribute("news",news);
         return "/background/mainTemp";
     }
 

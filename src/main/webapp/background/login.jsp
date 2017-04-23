@@ -19,6 +19,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/background/resources/scripts/facebox.js"></script>
 <!-- jQuery WYSIWYG Plugin -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/background/resources/scripts/jquery.wysiwyg.js"></script>
+  <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
+  <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <script type="text/javascript">
 	function checkForm(){
@@ -55,9 +58,12 @@
         <input class="text-input" type="password" id="password" name="password" value="${user.password }"/>
       </p>
       <div class="clear"></div>
-       <font id="error" color="red">${error }</font>   <input class="button" type="submit" value="登录" />
+       <font id="error" color="red">${error }</font>
+      <input class="button" type="submit" value="登录" />
+
     </form>
   </div>
+  <input type="button" class="btn btn-info" value="返回" onclick="javascript:history.back()"/>
   <!-- End #login-content -->
 </div>
 <!-- End #login-wrapper -->

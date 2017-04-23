@@ -48,7 +48,7 @@ public class CommentController {
         List<Comment> commentBackList = commentService.selectAll(comment);
         PageInfo<Comment> pageInfo = new PageInfo<Comment>(commentBackList);
         int total = (int)pageInfo.getTotal();
-        String pageCode=PageUtil.getPagation(request.getContextPath()+"/commentList.do?action=backList", total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")));
+        String pageCode=PageUtil.getPagation(request.getContextPath()+"/commentList.do?action=backList", total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")),null);
         model.addAttribute("pageCode",pageCode);
         model.addAttribute("navCode", NavUtil.genNewsManageNavigation("评论管理", "评论维护"));
         model.addAttribute("commentBackList",commentBackList);

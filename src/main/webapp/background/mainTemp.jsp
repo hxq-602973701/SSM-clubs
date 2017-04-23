@@ -44,17 +44,17 @@
 		<div class="newsMenu">
 			<ul class="nav nav-tabs nav-stacked">
 				  <li><a href="index.do"><strong>主页</strong></a></li>
-				  <li><a href="#"><strong>新闻管理</strong></a></li>
-				<li><a href="newsPre.do">&nbsp;&nbsp;新闻添加</a></li>
-				<li><a href="newsList.do">&nbsp;&nbsp;新闻维护</a></li>
-				  <li><a href=""><strong>新闻评论管理</strong></a></li>
-				<li><a href="commentList.do">&nbsp;&nbsp;新闻评论维护</a></li>
-				  <li><a href=""><strong>新闻类别管理</strong></a></li>
-				<li><a href="newsType.do">&nbsp;&nbsp;新闻类别添加</a></li>
-				<li><a href="newsTypeList.do">&nbsp;&nbsp;新闻类别维护</a></li>
-				  <li><a href=""><strong>友情连接管理</strong></a></li>
-				<li><a href="link.do?action=preSave">&nbsp;&nbsp;友情连接添加</a></li>
-				  <li><a href="linkList.do">&nbsp;&nbsp;友情连接维护</a></li>
+				  <li><a href="#"><strong>信息管理</strong></a></li>
+				<li><a href="newsPre.do">&nbsp;&nbsp;信息添加</a></li>
+				<li><a href="newsList.do">&nbsp;&nbsp;信息维护</a></li>
+				  <li><a href=""><strong>评论管理</strong></a></li>
+				<li><a href="commentList.do">&nbsp;&nbsp;评论维护</a></li>
+				  <li><a href=""><strong>信息类别管理</strong></a></li>
+				<li><a href="newsType.do">&nbsp;&nbsp;信息类别添加</a></li>
+				<li><a href="newsTypeList.do">&nbsp;&nbsp;信息类别维护</a></li>
+				  <li><a href=""><strong>友情链接管理</strong></a></li>
+				<li><a href="link.do?action=preSave">&nbsp;&nbsp;友情链接添加</a></li>
+				  <li><a href="linkList.do">&nbsp;&nbsp;友情链接维护</a></li>
 				  <li><a href=""><strong>系统管理</strong></a></li>
 				<li><a href="javascript:refreshSystem()">&nbsp;&nbsp;刷新服务器缓存</a></li>
 			</ul>
