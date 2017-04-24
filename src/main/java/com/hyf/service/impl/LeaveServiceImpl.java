@@ -21,12 +21,18 @@ public class LeaveServiceImpl implements LeaveService {
     private LeaveDao leaveDao;
 
     @Override
-    public void save(Leave leave) {
-        leaveDao.save(leave);
+    public Integer save(Leave leave) {
+        return leaveDao.save(leave);
     }
 
     @Override
-    public List<Leave> select() {
-        return leaveDao.select();
+    public List<Leave> select(Leave leave) {
+
+        return leaveDao.select(leave);
+    }
+
+    @Override
+    public Leave selectBycurrent(Leave leave) {
+        return leaveDao.selectBycurrent(leave);
     }
 }

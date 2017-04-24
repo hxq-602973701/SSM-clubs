@@ -13,7 +13,9 @@ public interface LeaveService {
      * 插入留言
      * @param leave
      */
-    void save(Leave leave);
+    Integer save(Leave leave);
 
-    List<Leave> select();
+    List<Leave> select(Leave leave);
+
+   Leave selectBycurrent(Leave leave);
 }

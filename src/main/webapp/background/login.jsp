@@ -59,11 +59,12 @@
       </p>
       <div class="clear"></div>
        <font id="error" color="red">${error }</font>
+      <input type="button" class="button" value="返回" onclick="javascript:history.back()"/>
       <input class="button" type="submit" value="登录" />
 
     </form>
   </div>
-  <input type="button" class="btn btn-info" value="返回" onclick="javascript:history.back()"/>
+
   <!-- End #login-content -->
 </div>
 <!-- End #login-wrapper -->

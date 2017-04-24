@@ -12,12 +12,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="userIp" column="user_ip"/>
 	</resultMap>
 
-	<insert id="save">
+	<insert id="save" useGeneratedKeys="true" keyProperty="leaveId">
 		INSERT  INTO t_leave(leave_id,leave_title,leave_content,del_flag,leave_date,user_ip)
 		VALUES (#{leaveId},#{leaveTitle},#{leaveContent},#{delFlag},#{leaveDate},#{userIp})
 	</insert>
 
 	<select id="select" resultMap="BaseResultMap">
-			select * from t_leave;
+			select * from t_leave t
+			<where>
+				<if test="leaveId!=null">
+					t.leave_id = #{leaveId}
+				</if>
+			</where>
+	</select>
+
+	<select id="selectBycurrent" resultMap="BaseResultMap">
+		SELECT  * from t_leave t WHERE  t.del_flag = 0 ORDER BY t.leave_date DESC limit 0,1
 	</select>
 </mapper> 
