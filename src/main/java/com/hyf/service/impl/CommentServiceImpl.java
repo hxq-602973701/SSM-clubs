@@ -38,4 +38,9 @@ public class CommentServiceImpl implements CommentService {
     public int deleteCommentById(Comment comment) {
         return commentDao.deleteCommentById(comment);
     }
+
+    @Override
+    public Comment selectByCurrent(Comment comment) {
+        return commentDao.selectByCurrent(comment);
+    }
 }

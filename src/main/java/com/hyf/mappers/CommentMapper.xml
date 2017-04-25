@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="newsId" column="newsId"/>
 		<result property="content" column="content"/>
 		<result property="userIP" column="userIP"/>
-		<result property="commentDate" column="commentDate" jdbcType="DATE" javaType="java.util.Date" />
+		<result property="commentDate" column="commentDate"/>
 	</resultMap>
 
 
@@ -39,4 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteCommentById">
         DELETE FROM t_comment WHERE commentId in (#{commentIds})
     </delete>
+
+	<select id="selectByCurrent" resultMap="BaseResultMap">
+		SELECT * from t_comment t  ORDER  BY t.commentDate DESC  limit 0,1
+	</select>
 </mapper> 

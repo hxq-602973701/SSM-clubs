@@ -23,4 +23,6 @@ public interface CommentService {
     List<Comment> selectAll(Comment comment);
 
     int deleteCommentById(Comment comment);
+
+    Comment selectByCurrent(Comment comment);
 }

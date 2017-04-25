@@ -67,8 +67,8 @@
 		</div>
 		<div style="float: right;">
 			<form action="commentListA.do" method="get">
-				评论日期：<input type="text" id="s_bCommentDate" name="s_bCommentDate" class="Wdate" onClick="WdatePicker()" style="width: 100px;" value="${s_bCommentDate }"/>
-				&nbsp;到&nbsp;<input type="text" id="s_aCommentDate" name="s_aCommentDate" class="Wdate" onClick="WdatePicker()" style="width: 100px;" value="${s_aCommentDate }"/>
+				评论日期：<input type="text" id="s_bCommentDate" name="s_bCommentDate" class="Wdate" onClick="WdatePicker()" style="width: 100px;" value="${comment.s_bCommentDate }"/>
+				&nbsp;到&nbsp;<input type="text" id="s_aCommentDate" name="s_aCommentDate" class="Wdate" onClick="WdatePicker()" style="width: 100px;" value="${comment.s_aCommentDate }"/>
 				&nbsp;&nbsp;<button class="btn btn-mini btn-primary" type="submit" style="margin-top: -8px;">查询</button>
 			</form>
 		</div>

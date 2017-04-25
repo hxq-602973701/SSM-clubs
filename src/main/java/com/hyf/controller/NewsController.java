@@ -206,7 +206,7 @@ public class NewsController {
         int total = (int)pageInfo.getTotal();
         String pageCode=PageUtil.getPagation(request.getContextPath()+"/newsList.do?action=backList", total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")),news);
         model.addAttribute("pageCode",pageCode);
-        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻维护"));
+        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("信息管理", "信息维护"));
         model.addAttribute("newsBackList",newsBackList);
         model.addAttribute("mainPage", "/background/news/newsList.jsp");
         model.addAttribute("news",news);
