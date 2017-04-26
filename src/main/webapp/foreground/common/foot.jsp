@@ -3,7 +3,7 @@
 <div class="row-fluid">
 	<div class="span12">
 		<div class="foot">
-			Copyright © 2013-2014 Java知识分享网 版权所有
+			Copyright © 2017-2018 南阳车友俱乐部 版权所有
 		</div>
 	</div>
 </div>

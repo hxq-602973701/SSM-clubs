@@ -138,8 +138,14 @@
 </body>
 </html>
 <script>
-	if('${news.isImage}'==1){
-		$("#hdtp").show();	
-	}
-	var type = $("#type").val();
+	$(function(){
+		if('${news.isImage}'==1){
+			$("#hdtp").show();
+		}
+		if('${assign}'=="qiantai"){
+			$("#imageName").hide();
+		}
+		var type = $("#type").val();
+	});
+
 </script>

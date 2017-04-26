@@ -39,6 +39,7 @@ public class IndexController {
     public String sendMsg(final Model model, News news) {
         newsTypeList = newsTypeService.selectByNewsType(news);
         model.addAttribute("newsTypeList",newsTypeList);
+        model.addAttribute("assign","qiantai");
         return "/background/news/newsSave";
     }
 

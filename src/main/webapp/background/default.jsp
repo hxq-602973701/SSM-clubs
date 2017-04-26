@@ -3,8 +3,8 @@
 <div class="row-fluid">
 	<div class="span12">
 		<div class="defaultPage">
-			<p>欢迎使用！</p>
-			<p>屌炸天新闻发布系统！</p>
+			<p>欢迎使用进入管理后台！</p>
+			<img src="${pageContext.request.contextPath}/images/logo1.png">
 		</div>
 	</div>
 </div>

@@ -30,7 +30,9 @@
 					</A>
 				</c:forEach>
 				<c:forEach var="imageNews" items="${imageNewsList}">
-					<P style="height: 20px;" class="tc"><A href="news.do?action=show&newsId=${imageNews.newsId }" target="_blank" title="${imageNews.title }">${fn:substring(imageNews.title,0,18) }</A></P>
+					<P style="height: 20px;" class="tc">
+						<A href="news.do?action=show&newsId=${imageNews.newsId }" target="_blank" title="${imageNews.title }">${fn:substring(imageNews.title,0,18) }</A>
+					</P>
 				</c:forEach>
 <UL>
   <LI class="fouce">1</LI>
@@ -135,7 +137,7 @@
 		var src=$('.tu_img').eq(index).attr('src');
 		$("#fou_img").css({  "opacity": "0"  });
 		$('#fou_img').attr('src',src);
-		$('#fou_img').stop(true).animate({ opacity: '1'},1000);
+		$('#fou_img').stop(true).animate({ opacity: '1'},1000); //停止当前动画 ，设置透明度
 		$('.tuhuo ul li').removeClass('fouce');
 		$('.tuhuo ul li').eq(index).addClass('fouce');
 		$('.tuhuo p').hide();

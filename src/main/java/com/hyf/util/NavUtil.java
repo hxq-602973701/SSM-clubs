@@ -5,7 +5,7 @@ public class NavUtil {
 	public static String genNewsListNavigation(String typeName,int typeId){
 		StringBuffer navCode=new StringBuffer();
 		navCode.append("当前位置>&nbsp;&nbsp;");
-		navCode.append("<a href='welcome.jsp'>主页</a>&nbsp;&nbsp;>&nbsp;&nbsp;");
+		navCode.append("<a href='index.do'>主页</a>&nbsp;&nbsp;>&nbsp;&nbsp;");
 		navCode.append("<a href='news.do?action=list&typeId="+typeId+"'>"+typeName+"</a>");
 		return navCode.toString();
 	}

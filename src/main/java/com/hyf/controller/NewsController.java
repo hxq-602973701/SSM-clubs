@@ -56,19 +56,19 @@ public class NewsController {
 
     @RequestMapping(value = "/news",method = RequestMethod.GET)
     public String getNewsList(final Model model, News news, String page, Comment comment, HttpServletRequest request){
-        //新闻类别显示
+        //信息类别显示
         newsTypeList = newsTypeService.selectByNewsType(news);
         model.addAttribute("newsTypeList",newsTypeList);
-        //最近的新闻
+        //车友信息最新动态
         newestNewsList = newsService.selectByCurrent(news);
         model.addAttribute("newestNewsList",newestNewsList);
-        //热点新闻
+        //热们信息
         hotNewsList = newsService.selectByClick(news);
         model.addAttribute("hotNewsList",hotNewsList);
         //友情链接
         linkList = linkService.selectAll();
         model.addAttribute("linkList",linkList);
-        //分页显示新闻
+        //分页显示信息
         if(StringUtil.isEmpty(page)){
             page = "1";
         }
@@ -86,7 +86,7 @@ public class NewsController {
         }else{
             model.addAttribute("mainPage","news/newsList.jsp");
         }
-        //按新闻Id准备数据并设置当前位置
+        //按信息Id准备数据并设置当前位置
         if(news.getNewsId()!=0){
             newsService.updateByClick(news);
             news =  newsService.selectByNewsId(news);
@@ -118,11 +118,12 @@ public class NewsController {
         newsTypeList = newsTypeService.selectByNewsType(news);
         model.addAttribute("newsTypeList",newsTypeList);
         if(news.getNewsId()==0){
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻添加"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("信息管理", "信息添加"));
+            model.addAttribute("assign", "qiantai");
         }else{
             news= newsService.selectByNewsId(news);
             model.addAttribute("news",news);
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻修改"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("信息管理", "信息修改"));
         }
         model.addAttribute("mainPage","/background/news/newsSave.jsp");
         return "/background/mainTemp";

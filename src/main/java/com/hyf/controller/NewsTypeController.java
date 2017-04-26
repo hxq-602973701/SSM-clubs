@@ -40,10 +40,10 @@ public class NewsTypeController {
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String getNewsTypeList(final Model model, News news){
-        //??????????
+        //信息类别显示
         newsTypeList = newsTypeService.selectByNewsType(news);
         model.addAttribute("newsTypeList",newsTypeList);
-        //?????????????????
+        //每一个类别下的信息
         List allIndexNewsList = new ArrayList();
         if(newsTypeList!=null && newsTypeList.size()!=0){
             for(NewsType newsType:newsTypeList){
@@ -56,23 +56,23 @@ public class NewsTypeController {
             });*/
         }
         model.addAttribute("allIndexNewsList",allIndexNewsList);
-        //?????????
+        //图片信息
         List<News>  imageNewsList = newsService.selectByCommon(news);
         model.addAttribute("imageNewsList",imageNewsList);
-        //??????????
+        //头信息
         List<News>  headNewsList = newsService.selectByHead(news);
         if(headNewsList.size()!=0){
             News headNews = headNewsList.get(0);
             headNews.setContent(StringUtil.Html2Text(headNews.getContent()));
             model.addAttribute("headNews",headNews);
         }
-        //?????????
+        //最近更新
         newestNewsList = newsService.selectByCurrent(news);
         model.addAttribute("newestNewsList",newestNewsList);
-        //???????
+        //热点信息
         List<News> hotSpotNewsList = newsService.selectByHot(news);
         model.addAttribute("hotSpotNewsList",hotSpotNewsList);
-        //????????
+        //友情链接
         List<Link> linkList = linkService.selectAll();
         model.addAttribute("linkList",linkList);
         return  "/index";
@@ -81,11 +81,11 @@ public class NewsTypeController {
     @RequestMapping(value = "/newsType",method = RequestMethod.GET)
     public String preSaveNewsType(final Model model,NewsType newsType) {
         if(newsType.getNewsTypeId()==null){
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别添加 "));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("信息类别管理", "信息类别添加 "));
         }else{
             newsType = newsTypeService.getNesTypeById(newsType);
             model.addAttribute("newsType",newsType);
-            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别维护"));
+            model.addAttribute("navCode", NavUtil.genNewsManageNavigation("信息类别管理", "信息类别维护"));
         }
         model.addAttribute("mainPage","/background/newsType/newsTypeSave.jsp");
         return "/background/mainTemp";
@@ -104,7 +104,7 @@ public class NewsTypeController {
     @RequestMapping(value = "/newsTypeList",method = RequestMethod.GET)
     public String LnkList(final Model model) {
         List<NewsType> newsTypeBackList = newsTypeService.selectAll();
-        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻类别管理", "新闻类别维护"));
+        model.addAttribute("navCode", NavUtil.genNewsManageNavigation("信息类别管理", "信息类别维护"));
         model.addAttribute("newsTypeBackList",newsTypeBackList);
         model.addAttribute("mainPage", "/background/newsType/newsTypeList.jsp");
         return "/background/mainTemp";
