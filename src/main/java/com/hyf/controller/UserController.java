@@ -5,6 +5,9 @@ import com.hyf.entity.User;
 import com.hyf.service.UserService;
 import com.hyf.util.ResponseUtil;
 import com.hyf.util.VerifyCode;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,19 +29,29 @@ public class UserController {
     @Resource
     private UserService userService;
 
+
     @RequestMapping(value = "/user",method = RequestMethod.POST)
     public String loginUser(final Model model, User user, HttpServletRequest request) {
         User currentUser = userService.login(user);
-        model.addAttribute("currentFUser",currentUser);
+        UsernamePasswordToken token=new UsernamePasswordToken(user.getUserName(), user.getPassword());
+        Subject subject =  SecurityUtils.getSubject();
+
+        subject.login(token);
+
         if(currentUser==null){
             model.addAttribute("user",user);
             model.addAttribute("error","用户名或者密码错误!");
             return "/background/login";
-        }else{
-           HttpSession session =  request.getSession();
-           session.setAttribute("currentFUser",currentUser);
+        } else if(subject.hasRole("管理员")){
+            HttpSession session =  request.getSession();
+            session.setAttribute("currentFUser",currentUser);
             model.addAttribute("mainPage","/background/default.jsp");
             return "/background/mainTemp";
+        }
+        else {
+            model.addAttribute("user",user);
+            model.addAttribute("error","您没有权限登录后台!");
+            return "/background/login";
         }
     }
 
@@ -84,7 +97,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/VerifyCodeServlet",method = RequestMethod.GET)
-    public void index2(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void index2(HttpServletRequest request, HttpServletResponse response,String a) throws IOException {
 
         VerifyCode vc = new VerifyCode();
         BufferedImage image = vc.getImage();//获取一次性验证码图片

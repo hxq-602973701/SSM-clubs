@@ -4,10 +4,10 @@ $(function() {
 	 */
 	$("#submit").hover(
 		function() {
-			$("#submit").attr("src", "/foreground/user/images/login2.jpg");
+			$("#submit").attr("src", "/club/foreground/user/images/login2.jpg");
 		},
 		function() {
-			$("#submit").attr("src", "/foreground/user/images/login1.jpg");
+			$("#submit").attr("src", "/club/foreground/user/images/login1.jpg");
 		}
 	);
 	

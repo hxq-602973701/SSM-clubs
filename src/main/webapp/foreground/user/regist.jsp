@@ -23,10 +23,10 @@
   
   <body>
 <div id="divMain">
-  <div id="divTitle">
+  <div id="divTitle" style="margin-left: 282px;">
     <span id="spanTitle">新用户注册</span>
   </div>
-  <div id="divBody">
+  <div id="divBody" style="margin-left: 282px;">
 <form action="<c:url value='/UserRegister.do'/>" method="post" id="registForm">
 	<input type="hidden" name="method" value="regist"/>  
     <table id="tableForm">

@@ -33,7 +33,7 @@
 				<img src="${pageContext.request.contextPath}/images/b.png" style="margin-left: -22px;"/>
 			</div>
 			<div class="headRight">
-				欢迎管理员：<font color="red">${currentUser.userName }</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:logout()">[&nbsp;安全退出&nbsp;]</a>&nbsp;&nbsp;&nbsp;&nbsp;<font id="today" class="currentDateTime"></font>
+				欢迎管理员：<font color="red">${currentFUser.userName }</font>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:logout()">[&nbsp;安全退出&nbsp;]</a>&nbsp;&nbsp;&nbsp;&nbsp;<font id="today" class="currentDateTime"></font>
 			</div>
 		</div>
 	</div>

@@ -26,7 +26,7 @@
 				<A href="" target="_blank"><IMG style="width: 330px; height: 208px;" id="fou_img" src=""></A>
 				<c:forEach var="imageNews" items="${imageNewsList}">
 					<A href="news.do?action=show&newsId=${imageNews.newsId }">
-						<IMG style="display: none;" class="tu_img" src="/userImage/${imageNews.imageName }" width="330" height="208" />
+						<IMG style="display: none;" class="tu_img" src="/club/userImage/${imageNews.imageName }" width="330" height="208" />
 					</A>
 				</c:forEach>
 				<c:forEach var="imageNews" items="${imageNewsList}">

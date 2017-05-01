@@ -30,7 +30,18 @@
 			loginname = "${requestScope.user.userName}";
 		}
 		$("#loginname").val(loginname);
+
+
 	});
+
+    function _hyz() {
+      /*
+       * 1. 获取<img>元素
+       * 2. 重新设置它的src
+       * 3. 使用毫秒来添加参数
+       */
+      $("#vCode").attr("src", "/club/VerifyCodeServlet.do?a=" + new Date().getTime());
+    }
 
 
     console.log($("#verifyCode").val())
@@ -43,28 +54,21 @@
         }
     });
 
-    function _hyz() {
-        /*
-         * 1. 获取<img>元素
-         * 2. 重新设置它的src
-         * 3. 使用毫秒来添加参数
-         */
-        $("#vCode").attr("src", "/VerifyCodeServlet.do?a=" + new Date().getTime());
-    }
+
 </script>
   </head>
   
-  <body>
+  <body style="background-color: #F16C4D">
 	<div class="main">
-	  <div><img src="<c:url value='/foreground/user/images/logo.gif'/>" /></div>
+	  <div><img src="<c:url value='/foreground/user/images/logo.gif'/>" style="margin-left: 281px;"/></div>
 	  <div>
 	    <%--<div class="imageDiv"><img class="img" src="<c:url value='/foreground/user/images/zj.png'/>"/></div>--%>
-        <div class="login1">
+        <div class="login1" style="margin-left: 434px;">
 	      <div class="login2">
             <div class="loginTopDiv">
               <span class="loginTop">会员登录</span>
               <span>
-                <a href="<c:url value='/foreground/user/regist.jsp'/>" class="registBtn"></a>
+                <a href="<c:url value='/foreground/user/regist.jsp'/>" class="registBtn">去注册</a>
               </span>
             </div>
             <div>

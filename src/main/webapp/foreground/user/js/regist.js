@@ -11,10 +11,10 @@ $(function() {
 	 */
 	$("#submitBtn").hover(
 		function() {
-			$("#submitBtn").attr("src", "/foreground/user/images/regist2.jpg");
+			$("#submitBtn").attr("src", "/club/foreground/user/images/regist2.jpg");
 		},
 		function() {
-			$("#submitBtn").attr("src", "/foreground/user/images/regist1.jpg");
+			$("#submitBtn").attr("src", "/club/foreground/user/images/regist1.jpg");
 		}
 	);
 	
@@ -313,5 +313,5 @@ function _hyz() {
 	 * 2. 重新设置它的src
 	 * 3. 使用毫秒来添加参数
 	 */
-	$("#imgVerifyCode").attr("src", "/VerifyCodeServlet.do?a=" + new Date().getTime());
+	$("#imgVerifyCode").attr("src", "/club/VerifyCodeServlet.do?a=" + new Date().getTime());
 }

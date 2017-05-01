@@ -10,7 +10,7 @@
 		<%--response.sendRedirect("/index.do");--%>
 <%--%>--%>
 <%
-	response.sendRedirect("/toIndex.do");
+	response.sendRedirect("/club/toIndex.do");
 %>
 </body>
 
