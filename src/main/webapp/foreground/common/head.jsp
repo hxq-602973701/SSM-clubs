@@ -25,8 +25,23 @@
 </script>
 <div class="row-fluid">
 	<div class="span12">
-		<img src="${pageContext.request.contextPath}/images/logo1.png" style="text-align: center">
+		<img src="${pageContext.request.contextPath}/images/logo1.png" style="text-align: center;margin-bottom: -44px;">
+		<div style="margin-left: 705px;">
+			${dq}
+			${today} <img src="${pageContext.request.contextPath}/weather/${jttb}" style="text-align: center">
+			<img src="${pageContext.request.contextPath}/weather/${jttb1}" style="text-align: center">
+
+			${nextDay}<img src="${pageContext.request.contextPath}/weather/${mttb}" style="text-align: center">
+			<img src="${pageContext.request.contextPath}/weather/${mttb1}" style="text-align: center">
+
+			${ht}   <img src="${pageContext.request.contextPath}/weather/${httb}" style="text-align: center">
+			<img src="${pageContext.request.contextPath}/weather/${httb1}" style="text-align: center">
+		</div>
+
+
+
 	</div>
+
 	<div class="headRight">
 		<font id="today" class="currentDateTime"></font>
 	</div>

@@ -9,6 +9,9 @@ import com.hyf.service.NewsTypeService;
 import com.hyf.util.NavUtil;
 import com.hyf.util.ResponseUtil;
 import com.hyf.util.StringUtil;
+import com.hyf.weather.ArrayOfString;
+import com.hyf.weather.WeatherWebService;
+import com.hyf.weather.WeatherWebServiceSoap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +43,21 @@ public class NewsTypeController {
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String getNewsTypeList(final Model model, News news){
+
+        WeatherWebService weatherWebService = new WeatherWebService();
+        WeatherWebServiceSoap weatherWebServiceSoap = weatherWebService.getWeatherWebServiceSoap();
+        ArrayOfString array = weatherWebServiceSoap.getWeatherbyCityName("南阳");
+        List<String> list = array.getString();
+        model.addAttribute("dq",list.get(1));
+        model.addAttribute("today",list.get(6));
+        model.addAttribute("nextDay",list.get(13));
+        model.addAttribute("ht",list.get(18));
+        model.addAttribute("jttb",list.get(8));
+        model.addAttribute("jttb1",list.get(9));
+        model.addAttribute("mttb",list.get(15));
+        model.addAttribute("mttb1",list.get(16));
+        model.addAttribute("httb",list.get(20));
+        model.addAttribute("httb1",list.get(21));
         //信息类别显示
         newsTypeList = newsTypeService.selectByNewsType(news);
         model.addAttribute("newsTypeList",newsTypeList);
