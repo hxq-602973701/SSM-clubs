@@ -35,10 +35,14 @@ public class UserController {
         User currentUser = userService.login(user);
         UsernamePasswordToken token=new UsernamePasswordToken(user.getUserName(), user.getPassword());
         Subject subject =  SecurityUtils.getSubject();
-
-        subject.login(token);
-
-        if(currentUser==null){
+        try {
+            subject.login(token);
+        }catch (Exception e){
+            model.addAttribute("user",user);
+            model.addAttribute("error","用户名或者密码错误!");
+            return "/background/login";
+        }
+        if(currentUser==null ){
             model.addAttribute("user",user);
             model.addAttribute("error","用户名或者密码错误!");
             return "/background/login";
