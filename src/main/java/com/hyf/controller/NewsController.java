@@ -11,6 +11,9 @@ import com.hyf.service.LinkService;
 import com.hyf.service.NewsService;
 import com.hyf.service.NewsTypeService;
 import com.hyf.util.*;
+import com.hyf.weather.ArrayOfString;
+import com.hyf.weather.WeatherWebService;
+import com.hyf.weather.WeatherWebServiceSoap;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -56,6 +59,7 @@ public class NewsController {
 
     @RequestMapping(value = "/news",method = RequestMethod.GET)
     public String getNewsList(final Model model, News news, String page, Comment comment, HttpServletRequest request){
+
         //信息类别显示
         newsTypeList = newsTypeService.selectByNewsType(news);
         model.addAttribute("newsTypeList",newsTypeList);

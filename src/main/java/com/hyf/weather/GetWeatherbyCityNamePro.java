@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>anonymous complex type�� Java �ࡣ
+ * <p>anonymous complex type的 Java 类。
  * 
- * <p>����ģʽƬ��ָ�������ڴ����е�Ԥ�����ݡ�
+ * <p>以下模式片段指定包含在此类中的预期内容。
  * 
  * <pre>
  * &lt;complexType>
@@ -39,7 +39,7 @@ public class GetWeatherbyCityNamePro {
     protected String theUserID;
 
     /**
-     * ��ȡtheCityName���Ե�ֵ��
+     * 获取theCityName属性的值。
      * 
      * @return
      *     possible object is
@@ -51,7 +51,7 @@ public class GetWeatherbyCityNamePro {
     }
 
     /**
-     * ����theCityName���Ե�ֵ��
+     * 设置theCityName属性的值。
      * 
      * @param value
      *     allowed object is
@@ -63,7 +63,7 @@ public class GetWeatherbyCityNamePro {
     }
 
     /**
-     * ��ȡtheUserID���Ե�ֵ��
+     * 获取theUserID属性的值。
      * 
      * @return
      *     possible object is
@@ -75,7 +75,7 @@ public class GetWeatherbyCityNamePro {
     }
 
     /**
-     * ����theUserID���Ե�ֵ��
+     * 设置theUserID属性的值。
      * 
      * @param value
      *     allowed object is
