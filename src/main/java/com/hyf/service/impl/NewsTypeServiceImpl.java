@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Administrator on 2016/12/17 0017.
  */
 @Service("newsTypeService")
-public class NewsTypeServiceImpl implements NewsTypeService{
+public class NewsTypeServiceImpl implements NewsTypeService {
 
     @Resource
     private NewsTypeDao newsTypeDao;

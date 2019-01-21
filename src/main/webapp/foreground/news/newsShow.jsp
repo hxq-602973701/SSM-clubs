@@ -1,24 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="data_list">
-	<div class="dataHeader navi">
-		${navCode}
-	</div>
-	<div>
-		<div class="news_title"><h3>${news.title }</h3></div>
-		<div class="news_info">
-			发布时间：[<fmt:formatDate value="${news.publishDate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>]&nbsp;&nbsp;作者：${news.author }
-			&nbsp;&nbsp;车友动态类别：[${news.typeName }]&nbsp;&nbsp;阅读次数：${news.click }
-		</div>
-		<div class="news_content">
-			${news.content }
-		</div>
-	</div>
-	<div class="upDownPage">
-		${pageCode }
-	</div>
+    <div class="dataHeader navi">
+        ${navCode}
+    </div>
+    <div>
+        <div class="news_title"><h3>${news.title }</h3></div>
+        <div class="news_info">
+            发布时间：[<fmt:formatDate value="${news.publishDate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>]&nbsp;&nbsp;作者：${news.author }
+            &nbsp;&nbsp;车友动态类别：[${news.typeName }]&nbsp;&nbsp;阅读次数：${news.click }
+        </div>
+        <div class="news_content">
+            ${news.content }
+        </div>
+    </div>
+    <div class="upDownPage">
+        ${pageCode }
+    </div>
 </div>
 
 <div class="data_list comment_list">
@@ -26,7 +26,8 @@
     <div class="commentDatas">
         <c:forEach var="comment" items="${commentList }">
             <div class="comment">
-                <font>${comment.userIP }：</font>${comment.content }&nbsp;&nbsp;&nbsp;[&nbsp;<fmt:formatDate value="${comment.commentDate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>&nbsp;]
+                <font>${comment.userIP }：</font>${comment.content }&nbsp;&nbsp;&nbsp;[&nbsp;<fmt:formatDate
+                    value="${comment.commentDate }" type="date" pattern="yyyy-MM-dd HH:mm:ss"/>&nbsp;]
             </div>
         </c:forEach>
     </div>

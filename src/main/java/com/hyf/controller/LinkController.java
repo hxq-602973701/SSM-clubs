@@ -26,51 +26,50 @@ public class LinkController {
     @Resource
     private LinkService linkService;
 
-    @RequestMapping(value = "/link",method = RequestMethod.GET)
-    public String preSaveLink(final Model model,Link link) {
-        if(link.getLinkId()==null){
+    @RequestMapping(value = "/link", method = RequestMethod.GET)
+    public String preSaveLink(final Model model, Link link) {
+        if (link.getLinkId() == null) {
             model.addAttribute("navCode", NavUtil.genNewsManageNavigation("友情链接管理", "友情链接添加"));
-        }else{
+        } else {
             link = linkService.selectLinkById(link);
-            model.addAttribute("link",link);
+            model.addAttribute("link", link);
             model.addAttribute("navCode", NavUtil.genNewsManageNavigation("友情链接管理", "友情链接修改"));
         }
-        model.addAttribute("mainPage","/background/link/linkSave.jsp");
+        model.addAttribute("mainPage", "/background/link/linkSave.jsp");
         return "/background/mainTemp";
     }
 
-    @RequestMapping(value = "/linkSave",method = RequestMethod.POST)
-    public String SaveLink(final Model model,Link link) {
+    @RequestMapping(value = "/linkSave", method = RequestMethod.POST)
+    public String SaveLink(final Model model, Link link) {
         if (link.getLinkId() == null) {
             linkService.save(link);
-        }else{
+        } else {
             linkService.updateByLinkId(link);
         }
-        return"redirect:linkList.do";
+        return "redirect:linkList.do";
     }
 
 
-    @RequestMapping(value = "/linkList",method = RequestMethod.GET)
+    @RequestMapping(value = "/linkList", method = RequestMethod.GET)
     public String LnkList(final Model model) {
         List<Link> linkBackList = linkService.selectAll();
         model.addAttribute("navCode", NavUtil.genNewsManageNavigation("友情链接管理", "友情链接维护"));
-        model.addAttribute("linkBackList",linkBackList);
+        model.addAttribute("linkBackList", linkBackList);
         model.addAttribute("mainPage", "/background/link/linkList.jsp");
         return "/background/mainTemp";
     }
 
-    @RequestMapping(value = "/linkDelete",method = RequestMethod.POST)
-    public  void LinkDelete(final Model model,Link link,HttpServletResponse response)throws Exception {
+    @RequestMapping(value = "/linkDelete", method = RequestMethod.POST)
+    public void LinkDelete(final Model model, Link link, HttpServletResponse response) throws Exception {
         int delNums = linkService.deleteLinkById(link);
         boolean flag;
-        if(delNums>0){
-          flag = true;
-        }else {
-          flag = false;
+        if (delNums > 0) {
+            flag = true;
+        } else {
+            flag = false;
         }
-        ResponseUtil.write(flag,response);
+        ResponseUtil.write(flag, response);
     }
-
 
 
 }

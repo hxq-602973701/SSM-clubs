@@ -11,6 +11,7 @@ public interface LeaveService {
 
     /**
      * 插入留言
+     *
      * @param leave
      */
     void save(Leave leave);

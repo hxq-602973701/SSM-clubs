@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hyf.dao.NewsDao">
-	<resultMap type="News" id="BaseResultMap">
-		<result property="newsId" column="newsId"/>
-		<result property="title" column="title"/>
-		<result property="content" column="content"/>
-		<result property="publishDate" column="publishDate"/>
-		<result property="author" column="author"/>
-		<result property="typeId" column="typeId"/>
-		<result property="typeName" column="typeName"/>
-		<result property="click" column="click"/>
-		<result property="isHead" column="isHead"/>
-		<result property="isImage" column="isImage"/>
-		<result property="imageName" column="imageName"/>
-		<result property="isHot" column="isHot"/>
+    <resultMap type="News" id="BaseResultMap">
+        <result property="newsId" column="newsId"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="publishDate" column="publishDate"/>
+        <result property="author" column="author"/>
+        <result property="typeId" column="typeId"/>
+        <result property="typeName" column="typeName"/>
+        <result property="click" column="click"/>
+        <result property="isHead" column="isHead"/>
+        <result property="isImage" column="isImage"/>
+        <result property="imageName" column="imageName"/>
+        <result property="isHot" column="isHot"/>
         <result property="state" column="state"/>
 
         <result property="total" column="total"/>
         <association property="newsType" resultMap="BaseNewsTypeResult"/>
-	</resultMap>
+    </resultMap>
 
     <resultMap type="NewsType" id="BaseNewsTypeResult">
         <result property="newsTypeId" column="newsTypeId"/>
         <result property="typeName" column="typeName"/>
     </resultMap>
     <insert id="newsAdd">
-        INSERT  INTO t_news(newsId,title,content,publishDate,author,typeId,click,isHead,isImage,imageName,isHot)
-         VALUES(#{newsId},#{title},#{content},now(),#{author},#{typeId},#{click},#{isHead},#{isImage},#{imageName},#{isHot})
+        INSERT INTO t_news(newsId,title,content,publishDate,author,typeId,click,isHead,isImage,imageName,isHot)
+        VALUES(#{newsId},#{title},#{content},now(),#{author},#{typeId},#{click},#{isHead},#{isImage},#{imageName},#{isHot})
     </insert>
 
-	<select id="selectByCommon"  resultMap="BaseResultMap">
-		SELECT * from t_news n
-		<where>
-			  n.isImage=1 AND  n.state = 1 order by n.publishDate desc limit 0,5
-		</where>
-	</select>
-
-    <select id="selectByHead"  resultMap="BaseResultMap">
+    <select id="selectByCommon" resultMap="BaseResultMap">
         SELECT * from t_news n
         <where>
-              n.isHead=1 and n.state = 1 order by n.publishDate desc limit 0,1
+            n.isImage=1 AND n.state = 1 order by n.publishDate desc limit 0,5
         </where>
     </select>
 
-    <select id="selectByCurrent"  resultMap="BaseResultMap">
-        SELECT * from t_news n WHERE n.state = 1
-           order by n.publishDate desc limit 0,8
+    <select id="selectByHead" resultMap="BaseResultMap">
+        SELECT * from t_news n
+        <where>
+            n.isHead=1 and n.state = 1 order by n.publishDate desc limit 0,1
+        </where>
     </select>
 
-    <select id="selectByHot"  resultMap="BaseResultMap">
+    <select id="selectByCurrent" resultMap="BaseResultMap">
+        SELECT * from t_news n WHERE n.state = 1
+        order by n.publishDate desc limit 0,8
+    </select>
+
+    <select id="selectByHot" resultMap="BaseResultMap">
         SELECT * from t_news n
         <where>
             n.isHot=1 AND n.state = 1 order by n.publishDate desc limit 0,8
         </where>
     </select>
 
-    <select id="selectByNewsTypeId"  resultMap="BaseResultMap">
-        SELECT * from t_news n  INNER JOIN t_newstype nt ON  n.typeId = nt.newsTypeId
+    <select id="selectByNewsTypeId" resultMap="BaseResultMap">
+        SELECT * from t_news n INNER JOIN t_newstype nt ON n.typeId = nt.newsTypeId
         <where>
             n.typeId = #{typeId}
         </where>
-        AND  n.state = 1
+        AND n.state = 1
         order by n.publishDate desc limit 0,8
     </select>
 
-    <select id="selectByClick"  resultMap="BaseResultMap">
-        SELECT * from t_news n  WHERE  n.state = 1
+    <select id="selectByClick" resultMap="BaseResultMap">
+        SELECT * from t_news n WHERE n.state = 1
         order by n.click desc limit 0,8
     </select>
 
-    <select id="selectNewslistByPage"  resultMap="BaseResultMap">
-        SELECT * from t_news n  INNER JOIN t_newstype nt ON  n.typeId = nt.newsTypeId
+    <select id="selectNewslistByPage" resultMap="BaseResultMap">
+        SELECT * from t_news n INNER JOIN t_newstype nt ON n.typeId = nt.newsTypeId
         <where>
             <if test="typeId !=null">
-               n.typeId = #{typeId}
+                n.typeId = #{typeId}
             </if>
         </where>
         order by n.publishDate desc limit #{start},#{pageSize}
     </select>
 
-    <select id="selectTotal"  resultMap="BaseResultMap" parameterType="int">
-        SELECT  count(*) as total from t_news n
+    <select id="selectTotal" resultMap="BaseResultMap" parameterType="int">
+        SELECT count(*) as total from t_news n
         <where>
-                n.typeId = #{typeId}
+            n.typeId = #{typeId}
         </where>
     </select>
 
-    <select id="selectByTypeId"  resultMap="BaseResultMap">
-        SELECT * from t_news n  INNER JOIN t_newstype nt ON  n.typeId = nt.newsTypeId
+    <select id="selectByTypeId" resultMap="BaseResultMap">
+        SELECT * from t_news n INNER JOIN t_newstype nt ON n.typeId = nt.newsTypeId
         <where>
             <if test="typeId !=null">
                 n.typeId = #{typeId}
@@ -99,8 +99,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by n.publishDate desc
     </select>
 
-    <select id="selectByNewsId"  resultMap="BaseResultMap">
-        SELECT * from t_news n  INNER JOIN t_newstype nt ON  n.typeId = nt.newsTypeId
+    <select id="selectByNewsId" resultMap="BaseResultMap">
+        SELECT * from t_news n INNER JOIN t_newstype nt ON n.typeId = nt.newsTypeId
         <where>
             <if test="typeId !=null">
                 n.newsId = #{newsId}
@@ -109,12 +109,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by n.publishDate desc
     </select>
 
-    <select id="getUpAndDownPageId"  resultMap="BaseResultMap">
-        SELECT * from t_news n  where n.newsId &lt; #{newsId} AND n.state = 1 ORDER BY n.newsId DESC limit 1
+    <select id="getUpAndDownPageId" resultMap="BaseResultMap">
+        SELECT * from t_news n where n.newsId &lt; #{newsId} AND n.state = 1 ORDER BY n.newsId DESC limit 1
     </select>
 
-    <select id="getDownPageId"  resultMap="BaseResultMap">
-        SELECT * from t_news n  where n.newsId &gt; #{newsId} and n.state = 1 ORDER BY n.newsId ASC limit 1
+    <select id="getDownPageId" resultMap="BaseResultMap">
+        SELECT * from t_news n where n.newsId &gt; #{newsId} and n.state = 1 ORDER BY n.newsId ASC limit 1
     </select>
 
     <update id="updateByClick">
@@ -124,7 +124,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT n.*,
         nt.typeName as typeName
-        from t_news  n INNER JOIN t_newstype nt ON n.typeId = nt.newsTypeId
+        from t_news n INNER JOIN t_newstype nt ON n.typeId = nt.newsTypeId
         <where>
             <if test="s_bPublishDate!='' and s_bPublishDate!=null ">
                 <![CDATA[   and DATE_FORMAT(n.publishDate, '%Y-%m-%d')>=  DATE_FORMAT(#{s_bPublishDate}, '%Y-%m-%d')   ]]>
@@ -141,7 +141,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <update id="update">
-        UPDATE t_news  set title = #{title},author=#{author},typeId=#{typeId},isHead=#{isHead},isImage=#{isImage},isHot=#{isHot} WHERE newsId = #{newsId}
+        UPDATE t_news set title =
+        #{title},author=#{author},typeId=#{typeId},isHead=#{isHead},isImage=#{isImage},isHot=#{isHot} WHERE newsId =
+        #{newsId}
     </update>
 
     <delete id="deleteNewsById">
@@ -149,6 +151,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <update id="updateInfo" parameterType="News">
-        UPDATE  t_news t set t.state = 1 where t.newsId = #{newsId}
+        UPDATE t_news t set t.state = 1 where t.newsId = #{newsId}
     </update>
 </mapper>

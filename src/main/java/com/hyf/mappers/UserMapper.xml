@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hyf.dao.UserDao">
-	<resultMap type="User" id="BaseResultMap">
-		<result property="id" column="id"/>
-		<result property="userName" column="userName"/>
-		<result property="password" column="password"/>
-		<result property="email" column="email"/>
-	</resultMap>
-	
-	<select id="login"  resultMap="BaseResultMap">
-			SELECT * from t_user u where u.userName=#{userName} AND u.password = #{password}
-	</select>
+    <resultMap type="User" id="BaseResultMap">
+        <result property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+    </resultMap>
 
-	<select id="isLogin"  resultType="boolean">
-		SELECT COUNT(1) from t_user u where u.userName=#{userName}
-	</select>
+    <select id="login" resultMap="BaseResultMap">
+        SELECT * from t_user u where u.userName=#{userName} AND u.password = #{password}
+    </select>
 
-	<select id="isRegist"  resultType="boolean">
-		SELECT COUNT(1) from t_user u where u.email=#{email}
-	</select>
+    <select id="isLogin" resultType="boolean">
+        SELECT COUNT(1) from t_user u where u.userName=#{userName}
+    </select>
 
-	<insert id="registe" >
-		INSERT  INTO t_user (userName,password,email) VALUES (#{userName},#{password},#{email})
-	</insert>
+    <select id="isRegist" resultType="boolean">
+        SELECT COUNT(1) from t_user u where u.email=#{email}
+    </select>
+
+    <insert id="registe">
+        INSERT INTO t_user (userName,password,email) VALUES (#{userName},#{password},#{email})
+    </insert>
 </mapper> 

@@ -4,168 +4,170 @@ import java.util.Date;
 
 public class News {
 
-	private int newsId;
-	private String title;
-	private String content;
-	private Date publishDate;
-	private String author;
-	private int typeId;
-	private String typeName;
-	private int click;
-	private int isHead;
-	private int isImage;
-	private String imageName;
-	private int isHot;
-	private int state;
+    private int newsId;
+    private String title;
+    private String content;
+    private Date publishDate;
+    private String author;
+    private int typeId;
+    private String typeName;
+    private int click;
+    private int isHead;
+    private int isImage;
+    private String imageName;
+    private int isHot;
+    private int state;
 
-	private int total;
-	private NewsType newsType;
-	private String s_bPublishDate;
-	private String s_aPublishDate;
+    private int total;
+    private NewsType newsType;
+    private String s_bPublishDate;
+    private String s_aPublishDate;
 
 
-	public News(int newsId, String title) {
-		super();
-		this.newsId = newsId;
-		this.title = title;
-	}
-	public News() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public int getNewsId() {
-		return newsId;
-	}
+    public News(int newsId, String title) {
+        super();
+        this.newsId = newsId;
+        this.title = title;
+    }
 
-	public void setNewsId(int newsId) {
-		this.newsId = newsId;
-	}
+    public News() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public int getNewsId() {
+        return newsId;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setNewsId(int newsId) {
+        this.newsId = newsId;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public Date getPublishDate() {
-		return publishDate;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setPublishDate(Date publishDate) {
-		this.publishDate = publishDate;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public Date getPublishDate() {
+        return publishDate;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
 
-	public int getTypeId() {
-		return typeId;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setTypeId(int typeId) {
-		this.typeId = typeId;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public String getTypeName() {
-		return typeName;
-	}
+    public int getTypeId() {
+        return typeId;
+    }
 
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
 
-	public int getClick() {
-		return click;
-	}
+    public String getTypeName() {
+        return typeName;
+    }
 
-	public void setClick(int click) {
-		this.click = click;
-	}
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
 
-	public int getIsHead() {
-		return isHead;
-	}
+    public int getClick() {
+        return click;
+    }
 
-	public void setIsHead(int isHead) {
-		this.isHead = isHead;
-	}
+    public void setClick(int click) {
+        this.click = click;
+    }
 
-	public int getIsImage() {
-		return isImage;
-	}
+    public int getIsHead() {
+        return isHead;
+    }
 
-	public void setIsImage(int isImage) {
-		this.isImage = isImage;
-	}
+    public void setIsHead(int isHead) {
+        this.isHead = isHead;
+    }
 
-	public String getImageName() {
-		return imageName;
-	}
+    public int getIsImage() {
+        return isImage;
+    }
 
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
-	}
+    public void setIsImage(int isImage) {
+        this.isImage = isImage;
+    }
 
-	public int getIsHot() {
-		return isHot;
-	}
+    public String getImageName() {
+        return imageName;
+    }
 
-	public void setIsHot(int isHot) {
-		this.isHot = isHot;
-	}
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
 
-	public int getTotal() {
-		return total;
-	}
+    public int getIsHot() {
+        return isHot;
+    }
 
-	public void setTotal(int total) {
-		this.total = total;
-	}
+    public void setIsHot(int isHot) {
+        this.isHot = isHot;
+    }
 
-	public NewsType getNewsType() {
-		return newsType;
-	}
+    public int getTotal() {
+        return total;
+    }
 
-	public void setNewsType(NewsType newsType) {
-		this.newsType = newsType;
-	}
+    public void setTotal(int total) {
+        this.total = total;
+    }
 
-	public String getS_bPublishDate() {
-		return s_bPublishDate;
-	}
+    public NewsType getNewsType() {
+        return newsType;
+    }
 
-	public void setS_bPublishDate(String s_bPublishDate) {
-		this.s_bPublishDate = s_bPublishDate;
-	}
+    public void setNewsType(NewsType newsType) {
+        this.newsType = newsType;
+    }
 
-	public String getS_aPublishDate() {
-		return s_aPublishDate;
-	}
+    public String getS_bPublishDate() {
+        return s_bPublishDate;
+    }
 
-	public void setS_aPublishDate(String s_aPublishDate) {
-		this.s_aPublishDate = s_aPublishDate;
-	}
+    public void setS_bPublishDate(String s_bPublishDate) {
+        this.s_bPublishDate = s_bPublishDate;
+    }
 
-	public int getState() {
-		return state;
-	}
+    public String getS_aPublishDate() {
+        return s_aPublishDate;
+    }
 
-	public void setState(int state) {
-		this.state = state;
-	}
+    public void setS_aPublishDate(String s_aPublishDate) {
+        this.s_aPublishDate = s_aPublishDate;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
 }

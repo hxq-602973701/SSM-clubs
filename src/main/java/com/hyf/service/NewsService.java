@@ -11,6 +11,7 @@ import java.util.List;
 public interface NewsService {
     /**
      * 根据参数查询出不同条件的列表
+     *
      * @param news
      * @return
      */
@@ -18,6 +19,7 @@ public interface NewsService {
 
     /**
      * 头条新闻
+     *
      * @param news
      * @return
      */
@@ -25,6 +27,7 @@ public interface NewsService {
 
     /**
      * 最近新闻
+     *
      * @param news
      * @return
      */
@@ -32,6 +35,7 @@ public interface NewsService {
 
     /**
      * 热点新闻
+     *
      * @param news
      * @return
      */
@@ -39,6 +43,7 @@ public interface NewsService {
 
     /**
      * 根据信息类别Id查找新闻数据
+     *
      * @param newsTypeId
      * @return
      */
@@ -46,6 +51,7 @@ public interface NewsService {
 
     /**
      * 按点击次数排序的新闻数据
+     *
      * @param news
      * @return
      */
@@ -53,15 +59,17 @@ public interface NewsService {
 
     /**
      * 分页查找数据
+     *
      * @param typeId
      * @param start
      * @param pageSize
      * @return
      */
-    List<News> selectNewslistByPage(int typeId,int start,int pageSize);
+    List<News> selectNewslistByPage(int typeId, int start, int pageSize);
 
     /**
      * 根据类别Id查找总数
+     *
      * @param typeId
      * @return
      */
@@ -72,6 +80,7 @@ public interface NewsService {
 
     /**
      * 新闻Id查询新闻
+     *
      * @param news
      * @return
      */
@@ -79,6 +88,7 @@ public interface NewsService {
 
     /**
      * 上一篇‘下一篇
+     *
      * @param news
      * @return
      */
@@ -88,6 +98,7 @@ public interface NewsService {
 
     /**
      * 更新阅读次数
+     *
      * @param news
      */
     void updateByClick(News news);

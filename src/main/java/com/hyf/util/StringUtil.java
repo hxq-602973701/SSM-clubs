@@ -4,72 +4,72 @@ import java.util.regex.Pattern;
 
 public class StringUtil {
 
-	public static boolean isEmpty(String str) {
-		if ("".equals(str) || str == null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public static boolean isEmpty(String str) {
+        if ("".equals(str) || str == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public static boolean isNotEmpty(String str) {
-		if (!"".equals(str) && str != null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public static boolean isNotEmpty(String str) {
+        if (!"".equals(str) && str != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public static boolean existStrArr(String str, String[] strArr) {
-		for (int i = 0; i < strArr.length; i++) {
-			if (strArr[i].equals(str)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public static boolean existStrArr(String str, String[] strArr) {
+        for (int i = 0; i < strArr.length; i++) {
+            if (strArr[i].equals(str)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public static String Html2Text(String inputString) {
-		// ¹ýÂËhtml±êÇ©
-		String htmlStr = inputString; // º¬html±êÇ©µÄ×Ö·û´®
-		String textStr = "";
-		java.util.regex.Pattern p_script;
-		java.util.regex.Matcher m_script;
-		java.util.regex.Pattern p_style;
-		java.util.regex.Matcher m_style;
-		java.util.regex.Pattern p_html;
-		java.util.regex.Matcher m_html;
-		java.util.regex.Pattern p_cont1;
-		java.util.regex.Matcher m_cont1;
-		java.util.regex.Pattern p_cont2;
-		java.util.regex.Matcher m_cont2;
-		try {
-			String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // ¶¨ÒåscriptµÄÕýÔò±í´ïÊ½{»ò<script[^>]*?>[\\s\\S]*?<\\/script>
-			// }
-			String regEx_style = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>"; // ¶¨ÒåstyleµÄÕýÔò±í´ïÊ½{»ò<style[^>]*?>[\\s\\S]*?<\\/style>
-			// }
-			String regEx_html = "<[^>]+>"; // ¶¨ÒåHTML±êÇ©µÄÕýÔò±í´ïÊ½
-			String regEx_cont1 = "[\\d+\\s*`~!@#$%^&*\\(?~£¡@#£¤%¡­¡­&*£¨£©¡ª¡ª+|{}¡¾¡¿¡®£º¡±¡°¡¯_]"; // ¶¨ÒåHTML±êÇ©µÄÕýÔò±í´ïÊ½
-			String regEx_cont2 = "[\\w[^\\W]*]"; // ¶¨ÒåHTML±êÇ©µÄÕýÔò±í´ïÊ½[a-zA-Z]
-			p_script = Pattern.compile(regEx_script, Pattern.CASE_INSENSITIVE);
-			m_script = p_script.matcher(htmlStr);
-			htmlStr = m_script.replaceAll(""); // ¹ýÂËscript±êÇ©
-			p_style = Pattern.compile(regEx_style, Pattern.CASE_INSENSITIVE);
-			m_style = p_style.matcher(htmlStr);
-			htmlStr = m_style.replaceAll(""); // ¹ýÂËstyle±êÇ©
-			p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
-			m_html = p_html.matcher(htmlStr);
-			htmlStr = m_html.replaceAll(""); // ¹ýÂËhtml±êÇ©
-			p_cont1 = Pattern.compile(regEx_cont1, Pattern.CASE_INSENSITIVE);
-			m_cont1 = p_cont1.matcher(htmlStr);
-			htmlStr = m_cont1.replaceAll(""); // ¹ýÂËÆäËü±êÇ©
-			p_cont2 = Pattern.compile(regEx_cont2, Pattern.CASE_INSENSITIVE);
-			m_cont2 = p_cont2.matcher(htmlStr);
-			htmlStr = m_cont2.replaceAll(""); // ¹ýÂËhtml±êÇ©
-			textStr = htmlStr;
-		} catch (Exception e) {
-			System.err.println("Html2Text: " + e.getMessage());
-		}
-		return textStr;// ·µ»ØÎÄ±¾×Ö·û´®
-	}
+    public static String Html2Text(String inputString) {
+        // ï¿½ï¿½ï¿½ï¿½htmlï¿½ï¿½Ç©
+        String htmlStr = inputString; // ï¿½ï¿½htmlï¿½ï¿½Ç©ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+        String textStr = "";
+        java.util.regex.Pattern p_script;
+        java.util.regex.Matcher m_script;
+        java.util.regex.Pattern p_style;
+        java.util.regex.Matcher m_style;
+        java.util.regex.Pattern p_html;
+        java.util.regex.Matcher m_html;
+        java.util.regex.Pattern p_cont1;
+        java.util.regex.Matcher m_cont1;
+        java.util.regex.Pattern p_cont2;
+        java.util.regex.Matcher m_cont2;
+        try {
+            String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // ï¿½ï¿½ï¿½ï¿½scriptï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½{ï¿½ï¿½<script[^>]*?>[\\s\\S]*?<\\/script>
+            // }
+            String regEx_style = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>"; // ï¿½ï¿½ï¿½ï¿½styleï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½{ï¿½ï¿½<style[^>]*?>[\\s\\S]*?<\\/style>
+            // }
+            String regEx_html = "<[^>]+>"; // ï¿½ï¿½ï¿½ï¿½HTMLï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
+            String regEx_cont1 = "[\\d+\\s*`~!@#$%^&*\\(?~ï¿½ï¿½@#ï¿½ï¿½%ï¿½ï¿½ï¿½ï¿½&*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+|{}ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_]"; // ï¿½ï¿½ï¿½ï¿½HTMLï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
+            String regEx_cont2 = "[\\w[^\\W]*]"; // ï¿½ï¿½ï¿½ï¿½HTMLï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½[a-zA-Z]
+            p_script = Pattern.compile(regEx_script, Pattern.CASE_INSENSITIVE);
+            m_script = p_script.matcher(htmlStr);
+            htmlStr = m_script.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½scriptï¿½ï¿½Ç©
+            p_style = Pattern.compile(regEx_style, Pattern.CASE_INSENSITIVE);
+            m_style = p_style.matcher(htmlStr);
+            htmlStr = m_style.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½styleï¿½ï¿½Ç©
+            p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
+            m_html = p_html.matcher(htmlStr);
+            htmlStr = m_html.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½htmlï¿½ï¿½Ç©
+            p_cont1 = Pattern.compile(regEx_cont1, Pattern.CASE_INSENSITIVE);
+            m_cont1 = p_cont1.matcher(htmlStr);
+            htmlStr = m_cont1.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç©
+            p_cont2 = Pattern.compile(regEx_cont2, Pattern.CASE_INSENSITIVE);
+            m_cont2 = p_cont2.matcher(htmlStr);
+            htmlStr = m_cont2.replaceAll(""); // ï¿½ï¿½ï¿½ï¿½htmlï¿½ï¿½Ç©
+            textStr = htmlStr;
+        } catch (Exception e) {
+            System.err.println("Html2Text: " + e.getMessage());
+        }
+        return textStr;// ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+    }
 }

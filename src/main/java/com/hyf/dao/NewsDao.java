@@ -21,7 +21,7 @@ public interface NewsDao {
 
     List<News> selectByClick(News news);
 
-    List<News> selectNewslistByPage(@Param("typeId")int typeId, @Param("start")int start, @Param("pageSize")int pageSize);
+    List<News> selectNewslistByPage(@Param("typeId") int typeId, @Param("start") int start, @Param("pageSize") int pageSize);
 
     int selectTotal(int typeId);
 

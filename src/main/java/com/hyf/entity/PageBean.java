@@ -2,35 +2,36 @@ package com.hyf.entity;
 
 public class PageBean {
 
-	private int page; // µÚ¼¸Ò³
-	private int pageSize; // Ã¿Ò³¼ÇÂ¼Êý
-	private int start;  // ÆðÊ¼Ò³
-	
-	
-	public PageBean(int page, int pageSize) {
-		super();
-		this.page = page;
-		this.pageSize = pageSize;
-	}
-	
-	public int getPage() {
-		return page;
-	}
-	public void setPage(int page) {
-		this.page = page;
-	}
-	
-	public int getPageSize() {
-		return pageSize;
-	}
+    private int page; // ï¿½Ú¼ï¿½Ò³
+    private int pageSize; // Ã¿Ò³ï¿½ï¿½Â¼ï¿½ï¿½
+    private int start;  // ï¿½ï¿½Ê¼Ò³
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
 
-	public int getStart() {
-		return (page-1)*pageSize;
-	}
-	
-	
+    public PageBean(int page, int pageSize) {
+        super();
+        this.page = page;
+        this.pageSize = pageSize;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getStart() {
+        return (page - 1) * pageSize;
+    }
+
+
 }

@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hyf.dao.LinkDao">
-	<resultMap type="Link" id="BaseResultMap">
-		<result property="linkId" column="linkId"/>
-		<result property="linkName" column="linkName"/>
-		<result property="linkUrl" column="linkUrl"/>
-		<result property="linkEmail" column="linkEmail"/>
-		<result property="orderNum" column="orderNum"/>
-	</resultMap>
-	
-	<select id="selectAll"  resultMap="BaseResultMap">
-		SELECT * from t_link l
-		 order by l.orderNum desc
-	</select>
+    <resultMap type="Link" id="BaseResultMap">
+        <result property="linkId" column="linkId"/>
+        <result property="linkName" column="linkName"/>
+        <result property="linkUrl" column="linkUrl"/>
+        <result property="linkEmail" column="linkEmail"/>
+        <result property="orderNum" column="orderNum"/>
+    </resultMap>
 
-	<select id="selectLinkById"  resultMap="BaseResultMap">
-		SELECT * from t_link l
-		where l.linkId = #{linkId}
-	</select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT * from t_link l
+        order by l.orderNum desc
+    </select>
 
-	<insert id="save">
-		INSERT  INTO t_link(linkId,linkName,linkUrl,linkEmail,orderNum) VALUES(#{linkId},#{linkName},#{linkUrl},#{linkEmail},#{orderNum})
-	</insert>
+    <select id="selectLinkById" resultMap="BaseResultMap">
+        SELECT * from t_link l
+        where l.linkId = #{linkId}
+    </select>
 
-	<update id="updateByLinkId">
-		UPDATE t_link  set linkName = #{linkName},linkUrl=#{linkUrl},linkEmail=#{linkEmail},orderNum=#{orderNum} WHERE linkId = #{linkId}
-	</update>
+    <insert id="save">
+        INSERT INTO t_link(linkId,linkName,linkUrl,linkEmail,orderNum)
+        VALUES(#{linkId},#{linkName},#{linkUrl},#{linkEmail},#{orderNum})
+    </insert>
 
-	<delete id="deleteLinkById">
-		DELETE FROM t_link WHERE linkId = #{linkId}
-	</delete>
+    <update id="updateByLinkId">
+        UPDATE t_link set linkName = #{linkName},linkUrl=#{linkUrl},linkEmail=#{linkEmail},orderNum=#{orderNum} WHERE
+        linkId = #{linkId}
+    </update>
+
+    <delete id="deleteLinkById">
+        DELETE FROM t_link WHERE linkId = #{linkId}
+    </delete>
 </mapper> 

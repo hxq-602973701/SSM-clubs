@@ -8,10 +8,11 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/12/17 0017.
  */
-public interface NewsTypeService{
+public interface NewsTypeService {
 
     /**
      * 获取新闻类别列表
+     *
      * @param news
      * @return
      */
@@ -19,6 +20,7 @@ public interface NewsTypeService{
 
     /**
      * 根据typeId查找
+     *
      * @param news
      * @return
      */

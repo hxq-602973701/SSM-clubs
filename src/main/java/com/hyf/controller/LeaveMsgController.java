@@ -23,14 +23,14 @@ public class LeaveMsgController {
     @Resource
     private LeaveService leaveService;
 
-    @RequestMapping(value = "/leaveMsg",method = RequestMethod.GET)
-    public String leaveMsg(final Model model,HttpServletRequest request) {
-                List<Leave> leaveList = leaveService.select();
-                model.addAttribute("leaveList",leaveList);
-                return "/temp/leaveMsg";
+    @RequestMapping(value = "/leaveMsg", method = RequestMethod.GET)
+    public String leaveMsg(final Model model, HttpServletRequest request) {
+        List<Leave> leaveList = leaveService.select();
+        model.addAttribute("leaveList", leaveList);
+        return "/temp/leaveMsg";
     }
 
-    @RequestMapping(value = "/goLeaveMsg",method = RequestMethod.GET)
+    @RequestMapping(value = "/goLeaveMsg", method = RequestMethod.GET)
     public String goLeaveMsg(final Model model, Leave leave, HttpServletRequest request) {
 
         //发表留言
@@ -39,7 +39,7 @@ public class LeaveMsgController {
         leave.setDelFlag(false);
         leaveService.save(leave);
         List<Leave> leaveList = leaveService.select();
-        model.addAttribute("leaveList",leaveList);
+        model.addAttribute("leaveList", leaveList);
         return "/temp/leaveMsg";
     }
 

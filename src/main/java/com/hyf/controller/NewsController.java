@@ -51,132 +51,133 @@ public class NewsController {
     private CommentService commentService;
 
     //将数据放在static中，在Spring容器启动时加载，只加载一次
-    public static  List<NewsType> newsTypeList = new ArrayList<>();
-    public static  List<News> newestNewsList = new ArrayList<>();
-    public static  List<News> hotNewsList = new ArrayList<>();
-    public static  List<Link> linkList = new ArrayList<>();
+    public static List<NewsType> newsTypeList = new ArrayList<>();
+    public static List<News> newestNewsList = new ArrayList<>();
+    public static List<News> hotNewsList = new ArrayList<>();
+    public static List<Link> linkList = new ArrayList<>();
 
-    @RequestMapping(value = "/news",method = RequestMethod.GET)
-    public String getNewsList(final Model model, News news, String page, Comment comment, HttpServletRequest request){
+    @RequestMapping(value = "/news", method = RequestMethod.GET)
+    public String getNewsList(final Model model, News news, String page, Comment comment, HttpServletRequest request) {
         //新闻类别显示
         newsTypeList = newsTypeService.selectByNewsType(news);
-        model.addAttribute("newsTypeList",newsTypeList);
+        model.addAttribute("newsTypeList", newsTypeList);
         //最近的新闻
         newestNewsList = newsService.selectByCurrent(news);
-        model.addAttribute("newestNewsList",newestNewsList);
+        model.addAttribute("newestNewsList", newestNewsList);
         //热点新闻
         hotNewsList = newsService.selectByClick(news);
-        model.addAttribute("hotNewsList",hotNewsList);
+        model.addAttribute("hotNewsList", hotNewsList);
         //友情链接
         linkList = linkService.selectAll();
-        model.addAttribute("linkList",linkList);
+        model.addAttribute("linkList", linkList);
         //分页显示新闻
-        if(StringUtil.isEmpty(page)){
+        if (StringUtil.isEmpty(page)) {
             page = "1";
         }
-        if(news.getTypeId()!=-1){
-           news.setTypeId(news.getTypeId());
+        if (news.getTypeId() != -1) {
+            news.setTypeId(news.getTypeId());
         }
         //按新闻类别准备数据
-        PageHelper.startPage(Integer.parseInt(page),Integer.parseInt(PropertiesUtil.getValue("pageSize")));
-        List<News> newestNewsListWithType =  newsService.selectByTypeId(news);
+        PageHelper.startPage(Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("pageSize")));
+        List<News> newestNewsListWithType = newsService.selectByTypeId(news);
         PageInfo<News> pageInfo = new PageInfo<News>(newestNewsListWithType);
-        model.addAttribute("newestNewsListWithType",newestNewsListWithType);
+        model.addAttribute("newestNewsListWithType", newestNewsListWithType);
         //设置公共页
-        if(news.getTypeId()==0){
-            model.addAttribute("mainPage","news/newsShow.jsp");
-        }else{
-            model.addAttribute("mainPage","news/newsList.jsp");
+        if (news.getTypeId() == 0) {
+            model.addAttribute("mainPage", "news/newsShow.jsp");
+        } else {
+            model.addAttribute("mainPage", "news/newsList.jsp");
         }
         //按新闻Id准备数据并设置当前位置
-        if(news.getNewsId()!=0){
+        if (news.getNewsId() != 0) {
             newsService.updateByClick(news);
-            news =  newsService.selectByNewsId(news);
+            news = newsService.selectByNewsId(news);
             List<News> upPage = newsService.getUpAndDownPageId(news);
             List<News> downPage = newsService.getDownPageId(news);
-            if(downPage.size()==0){
-                downPage.add(new News(-1,""));
-            }if(upPage.size()==0){
-                upPage.add(new News(-1,""));
+            if (downPage.size() == 0) {
+                downPage.add(new News(-1, ""));
+            }
+            if (upPage.size() == 0) {
+                upPage.add(new News(-1, ""));
             }
             //准备评论数据
             List<Comment> commentList = commentService.selectCommentList(news);
-            model.addAttribute("commentList",commentList);
+            model.addAttribute("commentList", commentList);
 
-            model.addAttribute("pageCode",PageUtil.genUpAndDownPageCode(upPage,downPage));
-            model.addAttribute("news",news);
-            model.addAttribute("navCode",NavUtil.genNewsNavigation(news.getTypeName(), news.getTypeId()+"",news.getTitle()));
-        }else{
+            model.addAttribute("pageCode", PageUtil.genUpAndDownPageCode(upPage, downPage));
+            model.addAttribute("news", news);
+            model.addAttribute("navCode", NavUtil.genNewsNavigation(news.getTypeName(), news.getTypeId() + "", news.getTitle()));
+        } else {
             NewsType newsType = newsTypeService.selectByNewsTypeId(news);
-            model.addAttribute("navCode", NavUtil.genNewsListNavigation(newsType.getTypeName(),news.getTypeId()));
+            model.addAttribute("navCode", NavUtil.genNewsListNavigation(newsType.getTypeName(), news.getTypeId()));
             long total = pageInfo.getTotal();
             model.addAttribute("pageCode", PageUtil.getUpAndDownPagation(total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("pageSize")), news.getTypeId()));
         }
-        return  "/foreground/newsTemp";
+        return "/foreground/newsTemp";
     }
 
-    @RequestMapping(value = "/newsPre",method = RequestMethod.GET)
-    public String preSaveNews(final Model model,News news) {
+    @RequestMapping(value = "/newsPre", method = RequestMethod.GET)
+    public String preSaveNews(final Model model, News news) {
         newsTypeList = newsTypeService.selectByNewsType(news);
-        model.addAttribute("newsTypeList",newsTypeList);
-        if(news.getNewsId()==0){
+        model.addAttribute("newsTypeList", newsTypeList);
+        if (news.getNewsId() == 0) {
             model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻添加"));
-        }else{
-            news= newsService.selectByNewsId(news);
-            model.addAttribute("news",news);
+        } else {
+            news = newsService.selectByNewsId(news);
+            model.addAttribute("news", news);
             model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻修改"));
         }
-        model.addAttribute("mainPage","/background/news/newsSave.jsp");
+        model.addAttribute("mainPage", "/background/news/newsSave.jsp");
         return "/background/mainTemp";
     }
 
-    @RequestMapping(value = "/newsSave",method = RequestMethod.POST)
-    public String SaveNews(final Model model,News news,HttpServletRequest request,int type) throws ServletException, IOException {
-        FileItemFactory factory=new DiskFileItemFactory();
-        ServletFileUpload upload=new ServletFileUpload(factory);
-        List<FileItem> items=null;
+    @RequestMapping(value = "/newsSave", method = RequestMethod.POST)
+    public String SaveNews(final Model model, News news, HttpServletRequest request, int type) throws ServletException, IOException {
+        FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        List<FileItem> items = null;
         try {
-            items=upload.parseRequest(request);
+            items = upload.parseRequest(request);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Iterator itr=items.iterator();
-        while(itr.hasNext()){
-            FileItem item=(FileItem) itr.next();
-            if(item.isFormField()){
-                String fieldName=item.getFieldName();
-                if("newsId".equals(fieldName)){
-                    if(StringUtil.isNotEmpty(item.getString("utf-8"))){
+        Iterator itr = items.iterator();
+        while (itr.hasNext()) {
+            FileItem item = (FileItem) itr.next();
+            if (item.isFormField()) {
+                String fieldName = item.getFieldName();
+                if ("newsId".equals(fieldName)) {
+                    if (StringUtil.isNotEmpty(item.getString("utf-8"))) {
                         news.setNewsId(Integer.parseInt(item.getString("utf-8")));
                     }
                 }
-                if("title".equals(fieldName)){
+                if ("title".equals(fieldName)) {
                     news.setTitle(item.getString("utf-8"));
                 }
-                if("content".equals(fieldName)){
+                if ("content".equals(fieldName)) {
                     news.setContent(item.getString("utf-8"));
                 }
-                if("author".equals(fieldName)){
+                if ("author".equals(fieldName)) {
                     news.setAuthor(item.getString("utf-8"));
                 }
-                if("typeId".equals(fieldName)){
+                if ("typeId".equals(fieldName)) {
                     news.setTypeId(Integer.parseInt(item.getString("utf-8")));
                 }
-                if("isHead".equals(fieldName)){
+                if ("isHead".equals(fieldName)) {
                     news.setIsHead(Integer.parseInt(item.getString("utf-8")));
                 }
-                if("isImage".equals(fieldName)){
+                if ("isImage".equals(fieldName)) {
                     news.setIsImage(Integer.parseInt(item.getString("utf-8")));
                 }
-                if("isHot".equals(fieldName)){
+                if ("isHot".equals(fieldName)) {
                     news.setIsHot(Integer.parseInt(item.getString("utf-8")));
                 }
-            }else if(!"".equals(item.getName())){
+            } else if (!"".equals(item.getName())) {
                 try {
-                    String imageName= DateUtil.getCurrentDateStr();
-                    news.setImageName(imageName+"."+item.getName().split("\\.")[1]);
-                    String filePath=PropertiesUtil.getValue("imagePath")+imageName+"."+item.getName().split("\\.")[1];
+                    String imageName = DateUtil.getCurrentDateStr();
+                    news.setImageName(imageName + "." + item.getName().split("\\.")[1]);
+                    String filePath = PropertiesUtil.getValue("imagePath") + imageName + "." + item.getName().split("\\.")[1];
                     item.write(new File(filePath));
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
@@ -184,73 +185,74 @@ public class NewsController {
                 }
             }
         }
-        if(news.getNewsId()!=0){
+        if (news.getNewsId() != 0) {
             newsService.update(news);
-        }else{
+        } else {
             newsService.newsAdd(news);
         }
-        if(type!=1){
-           return "addInfoSuccess";
-        }else{
-            return"redirect:newsList.do";
+        if (type != 1) {
+            return "addInfoSuccess";
+        } else {
+            return "redirect:newsList.do";
         }
 
     }
 
-    @RequestMapping(value = "/newsList",method = RequestMethod.GET)
-    public String newsList(final Model model,String page,News news,HttpServletRequest request) {
-        if(StringUtil.isEmpty(page)){
+    @RequestMapping(value = "/newsList", method = RequestMethod.GET)
+    public String newsList(final Model model, String page, News news, HttpServletRequest request) {
+        if (StringUtil.isEmpty(page)) {
             page = "1";
         }
         PageHelper.startPage(Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")));
         List<News> newsBackList = newsService.selectAll(news);
         PageInfo<News> pageInfo = new PageInfo<News>(newsBackList);
-        int total = (int)pageInfo.getTotal();
-        String pageCode=PageUtil.getPagation(request.getContextPath()+"/newsList.do?action=backList", total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")));
-        model.addAttribute("pageCode",pageCode);
+        int total = (int) pageInfo.getTotal();
+        String pageCode = PageUtil.getPagation(request.getContextPath() + "/newsList.do?action=backList", total, Integer.parseInt(page), Integer.parseInt(PropertiesUtil.getValue("commentPageSize")));
+        model.addAttribute("pageCode", pageCode);
         model.addAttribute("navCode", NavUtil.genNewsManageNavigation("新闻管理", "新闻维护"));
-        model.addAttribute("newsBackList",newsBackList);
+        model.addAttribute("newsBackList", newsBackList);
         model.addAttribute("mainPage", "/background/news/newsList.jsp");
         return "/background/mainTemp";
     }
 
-    @RequestMapping(value = "/newsListA",method = RequestMethod.GET)
-    public String commentListA(final Model model,News news) {
-        model.addAttribute("aaa",news);
-        return"forward:newsList.do";
+    @RequestMapping(value = "/newsListA", method = RequestMethod.GET)
+    public String commentListA(final Model model, News news) {
+        model.addAttribute("aaa", news);
+        return "forward:newsList.do";
     }
 
-    @RequestMapping(value = "/newsDelete",method = RequestMethod.POST)
-    public  void NewsDelete(final Model model,News news,HttpServletResponse response)throws Exception {
+    @RequestMapping(value = "/newsDelete", method = RequestMethod.POST)
+    public void NewsDelete(final Model model, News news, HttpServletResponse response) throws Exception {
         int delNums = newsService.deleteNewsById(news);
         boolean flag;
-        if(delNums>0){
+        if (delNums > 0) {
             flag = true;
-        }else {
+        } else {
             flag = false;
         }
-        ResponseUtil.write(flag,response);
+        ResponseUtil.write(flag, response);
     }
 
     /**
      * 审核
+     *
      * @param model
      * @param
      * @param response
      * @return
      * @throws Exception
      */
-    @RequestMapping(value="/info/check-info",method = RequestMethod.POST)
-    public String checkInfo(Model model, News news, HttpServletResponse response) throws  Exception{
+    @RequestMapping(value = "/info/check-info", method = RequestMethod.POST)
+    public String checkInfo(Model model, News news, HttpServletResponse response) throws Exception {
 
-        int resultNum =  newsService.updateInfo(news);
+        int resultNum = newsService.updateInfo(news);
         boolean delFlag;
-        if(resultNum==1){
+        if (resultNum == 1) {
             delFlag = true;
-        }else {
+        } else {
             delFlag = false;
         }
-        ResponseUtil.write(delFlag,response);
+        ResponseUtil.write(delFlag, response);
         return null;
     }
 

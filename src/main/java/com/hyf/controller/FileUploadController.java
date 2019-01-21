@@ -24,20 +24,20 @@ import java.util.List;
 @Controller
 public class FileUploadController {
 
-    @RequestMapping(value = "/imageUpload",method = RequestMethod.POST)
-    public void loginOut(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException {
+    @RequestMapping(value = "/imageUpload", method = RequestMethod.POST)
+    public void loginOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        PrintWriter out=response.getWriter();
-        FileItemFactory factory=new DiskFileItemFactory();
-        ServletFileUpload upload=new ServletFileUpload(factory);
+        PrintWriter out = response.getWriter();
+        FileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
         try {
-            List<FileItem> list=upload.parseRequest(request);
-            for(FileItem fileItem:list){
-                String imageName= DateUtil.getCurrentDateStr();
-                File file=new File(PropertiesUtil.getValue("imagePath")+imageName+"."+fileItem.getName().split("\\.")[1]);
-                String newPath=PropertiesUtil.getValue("imageFile")+"/"+imageName+"."+fileItem.getName().split("\\.")[1];
+            List<FileItem> list = upload.parseRequest(request);
+            for (FileItem fileItem : list) {
+                String imageName = DateUtil.getCurrentDateStr();
+                File file = new File(PropertiesUtil.getValue("imagePath") + imageName + "." + fileItem.getName().split("\\.")[1]);
+                String newPath = PropertiesUtil.getValue("imageFile") + "/" + imageName + "." + fileItem.getName().split("\\.")[1];
                 fileItem.write(file);
                 String callback = request.getParameter("CKEditorFuncNum");
                 out.println("<script type=\"text/javascript\">");

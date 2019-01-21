@@ -49,8 +49,8 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<News> selectNewslistByPage(int typeId, int start,int pageSize) {
-        return newsDao.selectNewslistByPage(typeId,start,pageSize);
+    public List<News> selectNewslistByPage(int typeId, int start, int pageSize) {
+        return newsDao.selectNewslistByPage(typeId, start, pageSize);
     }
 
     @Override
