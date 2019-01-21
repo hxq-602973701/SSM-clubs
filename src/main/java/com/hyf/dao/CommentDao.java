@@ -18,4 +18,6 @@ public interface CommentDao {
     List<Comment> selectAll(Comment comment);
 
     int deleteCommentById(Comment comment);
+
+    Comment selectByCurrent(Comment comment);
 }

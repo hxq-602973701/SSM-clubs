@@ -2,79 +2,83 @@ package com.hyf.entity;
 
 public class User {
 
-    private Integer id;
-    private String userName;
-    private String password;
-    private String email;
+	private Integer id;
+	private String userName;
+	private String password;
+	private String email;
+	private Integer roleId;
 
-    private String loginname;
-    private String loginpass;
-    private String verifyCode;
+	public Integer getRoleId() {
+		return roleId;
+	}
 
-    private String reloginpass;
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 
-    public String getReloginpass() {
-        return reloginpass;
-    }
+	private String loginname;
+	private String loginpass;
+	private String verifyCode;
 
-    public void setReloginpass(String reloginpass) {
-        this.reloginpass = reloginpass;
-    }
+	private String reloginpass;
 
-    public String getLoginpass() {
-        return loginpass;
-    }
+	public String getReloginpass() {
+		return reloginpass;
+	}
 
-    public void setLoginpass(String loginpass) {
-        this.loginpass = loginpass;
-    }
+	public void setReloginpass(String reloginpass) {
+		this.reloginpass = reloginpass;
+	}
 
-    public String getVerifyCode() {
-        return verifyCode;
-    }
+	public String getLoginpass() {
+		return loginpass;
+	}
 
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode;
-    }
+	public void setLoginpass(String loginpass) {
+		this.loginpass = loginpass;
+	}
 
-    public String getLoginname() {
-        return loginname;
-    }
+	public String getVerifyCode() {
+		return verifyCode;
+	}
 
-    public void setLoginname(String loginname) {
-        this.loginname = loginname;
-    }
+	public void setVerifyCode(String verifyCode) {
+		this.verifyCode = verifyCode;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getLoginname() {
+		return loginname;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setLoginname(String loginname) {
+		this.loginname = loginname;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 }

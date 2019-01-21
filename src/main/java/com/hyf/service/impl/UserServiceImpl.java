@@ -6,6 +6,7 @@ import com.hyf.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2016/12/17 0017.
@@ -34,5 +35,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registe(User user) {
         userDao.registe(user);
+    }
+
+    @Override
+    public Set<String> getRoles(String userName) {
+        return userDao.getRoles(userName);
+    }
+
+    @Override
+    public User getByUserName(String userName) {
+        return userDao.getByUserName(userName);
+    }
+
+    @Override
+    public Set<String> getPermissions(String userName) {
+        return userDao.getPermissions(userName);
     }
 }

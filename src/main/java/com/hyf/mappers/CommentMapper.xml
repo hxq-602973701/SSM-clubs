@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hyf.dao.CommentDao">
-    <resultMap type="Comment" id="BaseResultMap">
-        <result property="commentId" column="commentId"/>
-        <result property="newsId" column="newsId"/>
-        <result property="content" column="content"/>
-        <result property="userIP" column="userIP"/>
-        <result property="commentDate" column="commentDate" jdbcType="DATE" javaType="java.util.Date"/>
-    </resultMap>
+	<resultMap type="Comment" id="BaseResultMap">
+		<result property="commentId" column="commentId"/>
+		<result property="newsId" column="newsId"/>
+		<result property="content" column="content"/>
+		<result property="userIP" column="userIP"/>
+		<result property="commentDate" column="commentDate"/>
+	</resultMap>
 
 
-    <select id="selectCommentList" resultMap="BaseResultMap">
-        SELECT * from t_comment c where c.newsId = #{newsId} ORDER BY c.commentDate desc
-    </select>
+	<select id="selectCommentList"  resultMap="BaseResultMap">
+		SELECT * from t_comment c  where c.newsId =  #{newsId} ORDER BY  c.commentDate desc
+	</select>
 
-    <insert id="saveComment">
-        INSERT INTO t_comment(commentId,newsId,content,userIP,commentDate)
-        VALUES (#{commentId},#{newsId},#{content},#{userIP},#{commentDate})
-    </insert>
+	<insert id="saveComment">
+		INSERT  INTO t_comment(commentId,newsId,content,userIP,commentDate)
+		VALUES (#{commentId},#{newsId},#{content},#{userIP},#{commentDate})
+	</insert>
 
-    <select id="selectAll" resultMap="BaseResultMap">
-        SELECT c.*,
-        n.title as newsTitle
-        from t_comment c INNER JOIN t_news n ON c.newsId = n.newsId
-        <where>
-            <if test="s_bCommentDate!='' and s_bCommentDate!=null ">
+	<select id="selectAll"  resultMap="BaseResultMap">
+		SELECT c.*,
+		n.title as newsTitle
+		from t_comment c INNER JOIN t_news n ON c.newsId = n.newsId
+		<where>
+			<if test="s_bCommentDate!='' and s_bCommentDate!=null ">
                 <![CDATA[   and DATE_FORMAT(c.commentDate, '%Y-%m-%d')>=  DATE_FORMAT(#{s_bCommentDate}, '%Y-%m-%d')   ]]>
 
-            </if>
-            <if test="s_aCommentDate!='' and s_aCommentDate!=null">
+			</if>
+			<if test="s_aCommentDate!='' and s_aCommentDate!=null">
                 <![CDATA[   and DATE_FORMAT(c.commentDate, '%Y-%m-%d')<=  DATE_FORMAT(#{s_aCommentDate}, '%Y-%m-%d')   ]]>
-            </if>
-        </where>
-    </select>
+			</if>
+		</where>
+	</select>
 
     <delete id="deleteCommentById">
         DELETE FROM t_comment WHERE commentId in (#{commentIds})
     </delete>
+
+	<select id="selectByCurrent" resultMap="BaseResultMap">
+		SELECT * from t_comment t  ORDER  BY t.commentDate DESC  limit 0,1
+	</select>
 </mapper> 

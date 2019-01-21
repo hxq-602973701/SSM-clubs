@@ -25,20 +25,21 @@ public class IndexController {
     @Resource
     private NewsTypeService newsTypeService;
 
-    @RequestMapping(value = "/goBack", method = RequestMethod.GET)
+    @RequestMapping(value = "/goBack",method = RequestMethod.GET)
     public String goBack(HttpServletRequest request) {
         HttpSession session = request.getSession();
-        if (session.getAttribute("currentFUser") != null) {
+        if(session.getAttribute("currentFUser")!=null){
             return "/background/mainTemp";
-        } else {
+        }else{
             return "/background/login";
         }
     }
 
-    @RequestMapping(value = "/sendMsg", method = RequestMethod.GET)
+    @RequestMapping(value = "/sendMsg",method = RequestMethod.GET)
     public String sendMsg(final Model model, News news) {
         newsTypeList = newsTypeService.selectByNewsType(news);
-        model.addAttribute("newsTypeList", newsTypeList);
+        model.addAttribute("newsTypeList",newsTypeList);
+        model.addAttribute("assign","qiantai");
         return "/background/news/newsSave";
     }
 

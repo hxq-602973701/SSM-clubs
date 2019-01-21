@@ -3,6 +3,9 @@ package com.hyf.service.impl;
 import com.hyf.dao.LinkDao;
 import com.hyf.entity.Link;
 import com.hyf.service.LinkService;
+import com.hyf.weather.ArrayOfString;
+import com.hyf.weather.WeatherWebService;
+import com.hyf.weather.WeatherWebServiceSoap;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,4 +44,5 @@ public class LinkServiceImpl implements LinkService {
     public int deleteLinkById(Link link) {
         return linkDao.deleteLinkById(link);
     }
+
 }

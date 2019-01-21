@@ -9,15 +9,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<script src="${pageContext.request.contextPath}/bootstrap/js/jQuery.js"></script>
+<script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
 <link href="${pageContext.request.contextPath}/style/news.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+<link href="/js/layui/css/layui.css" rel="stylesheet">
+<script src="\js\layui\layui.js"></script>
+
+
 <style>
     .comment{border-color:transparent;}
 </style>
 <html>
 <head>
-    <title>Title</title>
+    <title>南阳市车友俱乐部</title>
 </head>
 <body style="width:1100px;margin:0 auto;">
 <div class="data_list comment_list" style="border-color:transparent;">
@@ -30,40 +37,76 @@
                 </div>
             </c:forEach>
         </div>
+        <div class="comment1" style="text-align: center">
+
+        </div>
     </div>
 </div>
 
 <div class="publish_list">
-    <form action="goLeaveMsg.do" method="get">
-
-        <div style="height:200px;">
-            <textarea style="width: 98%" rows="10" id="leaveContent" name="leaveContent"></textarea>
+        <div>
+            <textarea style="display: none;" id="leaveContent" name="leaveContent"></textarea>
         </div>
         <div class="publishButton" style="position:relative;top:20px;">
-            <button class="btn btn-primary" onclick="go()">发表留言</button>
+            <input type="button" id="save" class="btn btn-primary" value="发表留言"/>
+            <input type="button" id="canal" class="btn btn-primary"  value="返回"/>
+            <%--<button class="btn btn-primary" onclick="go()">发表留言</button>--%>
         </div>
-    </form>
 </div>
 <script type="application/javascript">
-    function go(){
-        var data = {};
-        data.leaveTitle = $("#leaveTitle").val();
-        data.leaveContent = $("#leaveContent").val();
+    $(function(){
+            var index;
+        layui.use('layedit', function(){
+            var layedit = layui.layedit;
+            index =  layedit.build('leaveContent');//建立编辑器
 
-        $.ajax({
-            url:"/goLeaveMsg.do",
-            type:"post",
-            data:data,
-            processData:false,
-            contentType:true,
-            success:function(data){
-                $(".comment").append(data);
-            },
-            error:function(e){
-                alert("错误！！");
-            }
         });
-    }
+
+        $("#canal").on("click",function () {
+            window.history.go(-1);
+        })
+
+        function getLocalTime(nS) {
+            return new Date(parseInt(nS) * 1000000).toLocaleString().replace(/:\d{1,2}$/,' ');
+        }
+
+        Date.prototype.toLocaleString = function() {
+            return this.getFullYear() + "-" + (this.getMonth() + 1) + "-" + this.getDate() + " " + this.getHours() + ":" + this.getMinutes() + ":" + this.getSeconds() + "";
+        };
+
+        $("#save").on("click",function () {
+            var data = {};
+            var layedit = layui.layedit;
+
+            var leaveContent  = layedit.getContent(index);
+            if(!leaveContent){
+                alert("留言内容不能为空!")
+                return;
+            }
+            data.leaveContent = leaveContent;
+            var dataStr = JSON.stringify(data);
+            console.log(data)
+            $.ajax({
+                url:"/goLeaveMsg.do",
+                type:"post",
+                data:{dataStr:dataStr},
+                dataType:'json',
+                success:function(data){
+                    console.log(data)
+                    var unixTimestamp = new Date(data.leaveDate) ;
+                    commonTime = unixTimestamp.toLocaleString();
+                    var html = [];
+                    html.push('<div>用户IP:'+data.userIp+":"+data.leaveContent+"&nbsp;&nbsp;&nbsp;[&nbsp;"+commonTime+']</div>');
+
+                    $(".comment1").append(html.join(""));
+                },
+                error:function(e){
+                    alert("错误！！");
+                }
+            });
+        })
+    })
+
 </script>
 </body>
 </html>
